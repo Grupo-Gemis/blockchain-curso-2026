@@ -1,1 +1,28 @@
-{"name":"blockchain-utn-2026","private":true,"version":"1.0.0","type":"module","engines":{"node":">=22.13.0"},"scripts":{"verificar":"node scripts/verificar-entorno.mjs","cadena":"node scripts/cadena.mjs","compilar":"hardhat build","nodo":"hardhat node --network hardhatMainnet --hostname 127.0.0.1","desplegar":"node scripts/desplegar.mjs","interfaz":"node scripts/interfaz.mjs","medir":"node scripts/medir.mjs","test":"node scripts/probar.mjs","sepolia":"node --env-file=.env scripts/desplegar-sepolia.mjs"},"dependencies":{"ethers":"6.16.0","@openzeppelin/contracts":"5.4.0"},"devDependencies":{"hardhat":"3.16.0"}}
+{
+  "name": "blockchain-utn-2026",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "verificar": "node scripts/verificar-entorno.mjs",
+    "cadena": "node scripts/cadena.mjs",
+    "compilar": "hardhat build",
+    "nodo": "hardhat node --network hardhatMainnet --hostname 127.0.0.1",
+    "desplegar": "node scripts/desplegar.mjs",
+    "interfaz": "node scripts/interfaz.mjs",
+    "medir": "node scripts/medir.mjs",
+    "test": "node scripts/probar.mjs",
+    "sepolia": "node --env-file=.env scripts/desplegar-sepolia.mjs",
+    "verificar:deployment": "node scripts/verificar-deployment.mjs"
+  },
+  "dependencies": {
+    "ethers": "6.16.0",
+    "@openzeppelin/contracts": "5.4.0"
+  },
+  "devDependencies": {
+    "hardhat": "3.16.0"
+  }
+}

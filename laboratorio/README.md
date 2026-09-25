@@ -54,7 +54,19 @@ node scripts/token.mjs
 
 La medición requiere nodo activo y contador implementado. El recorrido del token requiere su constructor completo. Los resultados generados quedan fuera de Git.
 
-## Testnet
+## Verificación local sin costo adicional
+
+Todos los laboratorios obligatorios se completan en la red local. No requieren fondos reales, tarjeta, una suscripción, una hardware wallet ni una cuenta de proveedor RPC. La computadora y la conexión para la instalación inicial son los recursos de trabajo. Se puede usar cualquier editor gratuito. Las plantillas CSV se abren en LibreOffice Calc o Google Sheets, sin necesidad de comprar Microsoft Excel.
+
+Después de desplegar:
+
+```sh
+npm run verificar:deployment
+```
+
+El comando verifica red, receipt, dirección, datos de creación, código y lectura del contador. Genera `resultados/verificacion-deployment.json`. Para Contador se comparan los datos de creación con el artifact, ya que su constructor no recibe argumentos. Su runtime contiene un propietario immutable y no debe compararse literalmente con el placeholder del compiler.
+
+## Testnet opcional
 
 Copiá .env.example como .env y configurá tu RPC y una cuenta exclusiva de prueba. No incluyas ese archivo ni recovery phrases en entregas.
 
@@ -68,7 +80,7 @@ Ese modo verifica chainId 11155111, saldo y estimación. Para realizar el envío
 npm run sepolia -- --desplegar
 ```
 
-El envío requiere saldo de testnet. Si no está disponible, se documenta la limitación y se presenta la comprobación local con los parámetros que cambiarían. El curso no exige fondos reales.
+El envío requiere saldo de testnet. Solo se realiza si hay un RPC y un faucet gratuitos disponibles, sin comprar saldo ni contratar planes. La verificación local completa satisface la entrega de la unidad 07 y los mismos criterios. Sepolia es una extensión opcional y no condiciona la aprobación.
 
 ## Diagnóstico
 

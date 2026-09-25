@@ -4,9 +4,9 @@ Se conserva el objetivo de configurar una blockchain local. La práctica termina
 
 ## Preparación
 
-Contador implementado en la unidad 03. Dependencias instaladas con npm ci.
+Contador implementado. Node.js y dependencias del laboratorio.
 
-Los comandos se ejecutan desde la carpeta `laboratorio` del repositorio.
+Los comandos se ejecutan desde la carpeta `laboratorio` del repositorio. Las rutas que comienzan con `laboratorios/` se refieren a la raíz del repositorio.
 
 ```sh
 npm run compilar
@@ -18,7 +18,7 @@ npm test -- Contador
 1. Desde laboratorio, ejecutá npm ci y npm run compilar. Guardá el nombre del compilador y el resultado.
 2. Ejecutá npm run nodo en una terminal que quede abierta.
 3. En otra terminal, ejecutá npm run desplegar. Registrá chainId y la dirección de Contador.
-4. Ejecutá npm test -- Contador. Leé los casos de permisos y de estado.
+4. Ejecutá npm test -- Contador. Explicá cómo se comprueban incrementos, reinicio autorizado y rechazo de otra cuenta.
 5. Detené únicamente el nodo que abriste, volvé a iniciarlo y comprobá qué ocurre al consultar una dirección vieja antes de desplegar de nuevo.
 
 ## Evidencia

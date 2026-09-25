@@ -29,6 +29,12 @@ npm run verificar
 
 El [README del laboratorio](laboratorio/README.md) explica la secuencia de implementación y las pruebas. Los cuestionarios se completan en [Moodle](https://aulasvirtuales.frba.utn.edu.ar/course/view.php?id=29399).
 
+## Recorrido sin costo adicional
+
+Todos los laboratorios obligatorios se completan localmente con herramientas gratuitas. No hace falta comprar criptomonedas, una wallet física, licencias ni servicios RPC. Las plantillas pueden resolverse en LibreOffice Calc o Google Sheets. Sepolia es una extensión opcional y su disponibilidad no condiciona la evaluación.
+
+La unidad 07 agrega `npm run verificar:deployment`, que comprueba la instancia local y guarda un informe de datos públicos. El README del laboratorio describe los comandos y la preparación.
+
 ## Edición de los materiales
 
 Los documentos están en `docs`. Cada HTML puede editarse con un editor de texto sin instalar herramientas. El contenido se organiza en elementos `section`, con un título y párrafos. CSS y JavaScript están incluidos al comienzo y al final del archivo.

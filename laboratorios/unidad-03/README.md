@@ -1,12 +1,12 @@
 # Unidad 03 · Contador con propietario y eventos
 
-La práctica usa Remix VM para la primera ejecución y el mismo contrato en el proyecto local. No necesita una testnet pública. La versión completa se encuentra en el código docente. El ejercicio ofrece una plantilla para completar.
+La práctica usa Remix VM para la primera ejecución y el mismo contrato en el proyecto local. No necesita una testnet pública. La versión completa se encuentra en el código docente; el ejercicio ofrece una plantilla para completar.
 
 ## Preparación
 
-Node.js y npm para la prueba local, o Remix VM para la primera implementación.
+Editor de código, Node.js y dependencias del laboratorio.
 
-Los comandos se ejecutan desde la carpeta `laboratorio` del repositorio.
+Los comandos se ejecutan desde la carpeta `laboratorio` del repositorio. Las rutas que comienzan con `laboratorios/` se refieren a la raíz del repositorio.
 
 ```sh
 npm run compilar
@@ -15,12 +15,11 @@ npm test -- Contador
 
 ## Trabajo autónomo
 
-1. Abrí el archivo ejercicios/clase03/Contador.sol.txt y copialo en Remix como Contador.sol. Seleccioná el compilador 0.8.28 y un entorno Remix VM.
+1. Abrí laboratorio/contracts/Contador.sol en el repositorio. Identificá los datos de estado, el constructor y las funciones pendientes.
 2. Completá incrementar para sumar uno y emitir el nuevo valor. Completá el control de reiniciar usando msg.sender.
 3. Compilá y desplegá desde la primera cuenta. Registrá el valor inicial.
 4. Ejecutá incrementar dos veces y comprobá el estado y los eventos.
 5. Cambiá a otra cuenta e intentá reiniciar. Volvé a la cuenta propietaria y repetí. Explicá la diferencia.
-6. Guardá la implementación final en laboratorio/contracts/Contador.sol para continuar con las siguientes unidades.
 
 ## Evidencia
 

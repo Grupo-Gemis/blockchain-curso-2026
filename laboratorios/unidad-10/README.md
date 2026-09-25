@@ -1,12 +1,12 @@
 # Unidad 10 · Planilla de costos por usuario
 
-La hoja Uso de costos-dapp.xlsx conserva el objetivo de la actividad final. El docente puede reemplazar los supuestos ficticios con mediciones del proyecto, manteniendo explícitas las unidades.
+La plantilla CSV permite modelar costos e ingresos con supuestos ficticios. Se completa en LibreOffice Calc o Google Sheets. Las cifras describen un escenario de negocio y no representan pagos para realizar el laboratorio.
 
 ## Preparación
 
-Lectura de las unidades 06 y 10. Una hoja de cálculo o una herramienta equivalente.
+Lectura de las unidades 06 y 10. LibreOffice Calc o Google Sheets.
 
-Los comandos se ejecutan desde la carpeta `laboratorio` del repositorio.
+Los comandos se ejecutan desde la carpeta `laboratorio` del repositorio. Las rutas que comienzan con `laboratorios/` se refieren a la raíz del repositorio.
 
 ```sh
 npm test -- Costos
@@ -14,16 +14,16 @@ npm test -- Costos
 
 ## Trabajo autónomo
 
-1. Abrí plantilla-uso.csv desde esta carpeta en una hoja de cálculo. Verificá las entradas del caso base y completá las filas de resultado con fórmulas.
+1. Abrí laboratorios/unidad-10/plantilla-uso.csv en una hoja de cálculo. Verificá las entradas del caso base y completá las filas de resultado con fórmulas.
 2. Comprobá costo por operación, costo por usuario y costo de red mensual.
 3. Con patrocinio igual a 1, verificá costo del usuario, ingresos, gastos y resultado operativo.
 4. Cambiá patrocinio a 0 y explicá qué resultados cambian y cuáles permanecen.
 5. Restaurá patrocinio a 1. Cambiá operaciones por usuario de 20 a 40 y anticipá el efecto.
-6. Prepará una defensa breve con dos supuestos críticos, evidencia disponible y una limitación del modelo.
+6. Explicá por escrito dos supuestos críticos, la evidencia disponible y una limitación del modelo.
 
 ## Evidencia
 
-Planilla con fórmulas y una defensa de 3 minutos. Adjuntar una tabla con el escenario base y el cambio de una entrada, indicando cuándo se calculó cada caso.
+Planilla con fórmulas y explicación de sus supuestos. Adjuntá una tabla con el escenario base y el cambio de una entrada, identificando las entradas utilizadas en cada caso.
 
 ## Criterios de comprobación
 
