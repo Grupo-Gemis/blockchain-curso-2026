@@ -16,4 +16,4 @@ jobs:
       - run: npm ci
       - run: npm run verificar
       - run: npm run compilar
-      - run: npm test -- Costos
+      - run: npm test -- "Costos|Deployment"
