@@ -1,0 +1,19 @@
+Variable,Valor,Unidad,Tipo
+Usuarios,100,usuarios,Entrada
+Operaciones por usuario,20,operaciones/mes,Entrada
+Gas por operación,50000,gas,Entrada
+Precio efectivo,2,gwei/gas,Entrada
+Conversión ETH,2000,USD/ETH,Supuesto
+Abono por usuario,5,USD/mes,Entrada
+Costo fijo,100,USD/mes,Entrada
+Patrocinio,1,1 sí / 0 no,Entrada
+Comisión por operación,,ETH,Calcular
+Comisión por operación,,USD,Calcular
+Gas por usuario,,USD/mes,Calcular
+Gas de todos los usuarios,,USD/mes,Calcular
+Costo total de cada usuario,,USD/mes,Calcular
+Ingresos organización,,USD/mes,Calcular
+Gastos organización,,USD/mes,Calcular
+Resultado organización,,USD/mes,Calcular
+Contribución por usuario,,USD/mes,Calcular
+Usuarios para equilibrio,,usuarios,Calcular si existe

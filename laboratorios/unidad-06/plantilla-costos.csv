@@ -1,0 +1,9 @@
+Variable,Valor,Unidad,Tipo
+Gas usado,50000,gas,Entrada
+Gas limit,80000,gas,Entrada
+Base fee,20,gwei/gas,Entrada
+Priority fee máxima,2,gwei/gas,Entrada
+Max fee,30,gwei/gas,Entrada
+Precio efectivo,,gwei/gas,Calcular
+Comisión efectiva,,ETH,Calcular
+Cota de ejecución,,ETH,Calcular
