@@ -125,6 +125,26 @@ Un archivo `entorno.txt` que contenga:
 
 Registrá el comando, el mensaje completo y la carpeta desde la que lo ejecutaste. Cambiá una condición por vez.
 
+## Explorar firmas y nonce en el apunte
+
+En el [ejemplo de firmas](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-01.html#signature-lab), las claves ya están preparadas. Compará estas situaciones:
+
+1. Ana firma el mensaje original y tiene permiso.
+2. El mensaje cambia después de firmarse.
+3. Carlos firma y se verifica con la clave pública de Carlos, pero el permiso sigue siendo de Ana.
+4. Ana firma correctamente, pero los fondos ya se gastaron.
+
+Registrá por separado si la firma es válida y si la operación queda autorizada. Podés desplegar las claves de práctica y regenerarlas.
+
+En el [ejemplo de nonce](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-01.html#nonce-lab), probá un nonce, avanzá al siguiente y compará los hashes. Luego:
+
+1. Cargá el ejemplo resuelto. Comprobá que el hash comienza con `00`.
+2. Cambiá el importe y volvé a comprobar el mismo nonce.
+3. Restablecé el ejemplo e iniciá una búsqueda automática.
+4. Repetí con uno, dos y tres ceros. Compará intentos observados con promedios esperados.
+
+El número de intentos puede variar. El promedio no garantiza que una búsqueda termine antes de esa cantidad. Estos dos ejemplos amplían la exploración y no cambian la entrega de `entorno.txt`.
+
 ## Extensión opcional
 
 Guardá una copia del script y probá una alteración que agregue solo un espacio al texto. Predecí si cambiarán los hashes y repetí la ejecución. Después explicá por qué un hash no es cifrado y por qué una firma válida no permite gastar dos veces la misma salida.
