@@ -1,0 +1,38 @@
+UNIDAD 01 - EVIDENCIA DEL ENTORNO
+
+Versiones
+---------
+Node.js: v24.18.0
+npm: 11.16.0
+
+Salida de npm run verificar
+--------------------------
+Node.js: v24.18.0 | npm: 11.16.0
+hardhat 3.16.0
+ethers 6.16.0
+@openzeppelin/contracts 5.4.0
+
+Salida de npm run cadena
+------------------------
+Cadena inicial válida: true
+Tras alterar el primer dato: false
+Tras recalcular toda la cadena: true
+Simulación de enlaces hash. No implementa consenso ni demuestra inmutabilidad por sí sola.
+
+Explicación
+-----------
+El script construye tres bloques. El hash de cada bloque se calcula con su índice, su dato y el
+hash del bloque anterior. SHA-256 transforma esa entrada en una huella de 256 bits. Es una
+función determinista: la misma entrada produce siempre la misma huella. Al cambiar el primer
+mensaje, aunque sea agregando un espacio, cambian los bytes de entrada y el hash recalculado ya
+no coincide con el almacenado. Por eso la verificación devuelve false. Este comportamiento se
+conoce como efecto avalancha: un cambio mínimo suele modificar aproximadamente la mitad de los
+bits de salida.
+
+Después, el programa vuelve a calcular el hash de cada bloque y actualiza cada enlace. La cadena
+recupera su consistencia interna y la función local devuelve true. Sin embargo, esto no demuestra
+inmutabilidad ni aceptación por una red. Una persona que controla una copia local puede reescribir
+todos sus bloques. En una blockchain distribuida, los demás nodos conservan copias, validan las
+transacciones y aplican reglas de consenso para decidir qué historial aceptar. La siguiente
+comprobación sería comparar la cadena recalculada con la copia y el estado aceptado por otros
+nodos independientes. Si no coincide con el historial acordado, esos nodos deberían rechazarla.

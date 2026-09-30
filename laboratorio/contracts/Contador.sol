@@ -8,7 +8,9 @@ contract Contador {
     error NoAutorizado();
     error PendienteDeImplementacion();
 
-    constructor() { propietario = msg.sender; }
+    constructor() {
+        propietario = msg.sender;
+    }
 
     function incrementar() external {
         // TODO: incrementar valor y emitir ValorCambiado.
