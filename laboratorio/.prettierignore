@@ -1,0 +1,7 @@
+node_modules/
+artifacts/
+cache/
+resultados/
+ui/despliegue.json
+package-lock.json
+ejercicios/**/*.txt

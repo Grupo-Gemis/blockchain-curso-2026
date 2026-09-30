@@ -16,13 +16,17 @@
     "medir": "node scripts/medir.mjs",
     "test": "node scripts/probar.mjs",
     "sepolia": "node --env-file=.env scripts/desplegar-sepolia.mjs",
-    "verificar:deployment": "node scripts/verificar-deployment.mjs"
+    "verificar:deployment": "node scripts/verificar-deployment.mjs",
+    "formatear": "prettier --write .",
+    "verificar:formato": "prettier --check ."
   },
   "dependencies": {
-    "ethers": "6.16.0",
-    "@openzeppelin/contracts": "5.4.0"
+    "@openzeppelin/contracts": "5.4.0",
+    "ethers": "6.16.0"
   },
   "devDependencies": {
-    "hardhat": "3.16.0"
+    "hardhat": "3.16.0",
+    "prettier": "^3.9.9",
+    "prettier-plugin-solidity": "^2.4.1"
   }
 }
