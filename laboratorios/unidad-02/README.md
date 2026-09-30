@@ -1,41 +1,37 @@
-# Unidad 02 · Matriz de wallets y recibo de transacción
+# Unidad 02 · Wallets y resultado de una transacción
 
-Se retoman las tres preguntas del DOCX original con criterios que permiten comparar respuestas. La consulta de una transacción real es una extensión. El archivo de ejemplo permite resolver el núcleo sin cuentas externas.
+En el [encuentro 02](https://grupo-gemis.github.io/blockchain-curso-2026/encuentro-02.html) Ana utiliza una cuenta de Ethereum. Esta práctica distingue quién puede firmar, qué red se consulta y qué muestra un recibo. Se trabaja con datos del repositorio; no hace falta crear una cuenta ni conectarse a una red pública.
 
-## Preparación
+## 1. Comparar tres maneras de operar
 
-Lectura de la unidad 02. El análisis del JSON no necesita nodo local.
+Leé los [tres casos de la actividad](../../actividades/unidad-02.md). Prepará una tabla con una fila por caso:
 
-Los comandos se ejecutan desde la carpeta `laboratorio` del repositorio.
+| Caso | ¿Quién controla la firma? | ¿Cómo se utiliza? | ¿Quién puede recuperar el acceso? | Riesgo que revisarías primero |
+|---|---|---|---|---|
+| A | | | | |
+| B | | | | |
+| C | | | | |
 
-```sh
-# Datos: datos/transaccion-ejemplo.json
-```
+La custodia y la conectividad responden preguntas diferentes. En el caso C sabemos quién controla la firma, pero el enunciado no dice cómo guarda internamente las claves el proveedor. Registrá ese dato como no especificado.
 
-## Trabajo autónomo
+## 2. Leer el archivo de práctica
 
-1. Leé los casos de la actividad sincrónica y clasificá custodia y conectividad por separado.
-2. Elegí un caso y anotá el riesgo prioritario, el responsable de recuperación y la evidencia necesaria para autorizar una operación.
-3. Abrí datos/transaccion-ejemplo.json. Identificá chainId, from, to, valueWei, status, gasUsed y effectiveGasPriceGwei.
-4. Calculá la comisión usando los datos explícitos del ejemplo. Separá esa comisión del valor transferido.
-5. Como extensión, compará esos campos con una transacción pública de Sepolia en un explorador. Anotá URL y fecha de consulta.
+Abrí [datos/transaccion-ejemplo.json](../../laboratorio/datos/transaccion-ejemplo.json). Desde la carpeta `laboratorio`, la ruta es `datos/transaccion-ejemplo.json`. El contenido es un **recibo ficticio** con datos consistentes para practicar. Su campo `hash` es un marcador; no se busca en un explorador.
 
-## Evidencia
+Prepará una ficha que responda:
 
-Una matriz de comparación y una ficha de transacción. No incluir claves, frases de recuperación ni capturas de información sensible.
+1. ¿Qué indican `chainId`, `from` y `to`? ¿En qué red ocurre el ejemplo?
+2. ¿Cuál es el valor transferido (`valueETH` y `valueWei`)? ¿Qué indica `status: 1`?
+3. ¿Cuánto vale `gasUsed × effectiveGasPriceGwei` en gwei y en ETH? Usá `1 gwei = 10⁻⁹ ETH`.
+4. ¿Cuánto recibe el destinatario y cuánto gasta en total el emisor? Mantené separados el valor transferido y la comisión.
+5. Si una wallet hubiera cancelado la firma antes del envío, ¿habría un receipt para esa solicitud?
 
-## Criterios de comprobación
+Para interpretar el resultado, consultá la explicación de [receipt y comisión](https://grupo-gemis.github.io/blockchain-curso-2026/encuentro-02.html#lectura-02-recibo). Como extensión, podés elegir una transacción pública de Sepolia y registrar su URL, red y fecha de consulta. Esa operación es distinta del archivo de práctica.
 
-- Custodia y conectividad figuran en columnas distintas.
-- La red de la ficha está identificada.
-- La comisión no se confunde con el valor transferido.
+## Evidencia y comprobación
+
+Entregá la tabla de tres casos y la ficha del recibo con la cuenta completa. La ficha debe identificar la red local `31337`, separar el valor de la comisión y explicar por qué obtener un hash al enviar todavía no garantiza éxito. No adjuntes claves privadas ni recovery phrases.
 
 ## Extensión
 
-Discutí un esquema de firmas múltiples para una organización y qué cambios introduce en recuperación y aprobación.
-
-## Material relacionado
-
-- [Apunte de la unidad](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-02.html)
-- [Actividad de aplicación](../../actividades/unidad-02.md)
-- [Preparación del laboratorio](../../laboratorio/README.md)
+Para una organización con dos responsables, describí quién propone una operación, quién la aprueba y qué procedimiento seguirían si uno pierde su dispositivo. Evaluá si un esquema de firmas múltiples ayuda con ese proceso.

@@ -1,42 +1,38 @@
 # Unidad 03 · Contador con propietario y eventos
 
-La práctica usa Remix VM para la primera ejecución y el mismo contrato en el proyecto local. No necesita una testnet pública. La versión completa se encuentra en el código docente; el ejercicio ofrece una plantilla para completar.
+El [encuentro 02](https://grupo-gemis.github.io/blockchain-curso-2026/encuentro-02.html#lectura-02-contrato) explica qué estado conserva un smart contract y cómo comprueba permisos. Ahora vas a completar un contador que permite incrementar a cualquier cuenta y reservar el reinicio a quien lo desplegó. Todo se ejecuta en el entorno local del curso.
 
-## Preparación
+## 1. Predecir el comportamiento
 
-Editor de código, Node.js y dependencias del laboratorio.
+Antes de editar código, anotá el valor esperado después de cada paso. Ana despliega el contrato. Bruno incrementa dos veces. Bruno intenta reiniciar. Ana reinicia. Registrá para cada llamada quién es `msg.sender`, si debe tener éxito y qué valor debería leerse después. El reinicio rechazado debe conservar el valor anterior.
 
-Los comandos se ejecutan desde la carpeta `laboratorio` del repositorio. Las rutas que comienzan con `laboratorios/` se refieren a la raíz del repositorio.
+## 2. Completar la plantilla
+
+Abrí [laboratorio/contracts/Contador.sol](../../laboratorio/contracts/Contador.sol). Ya están declarados `valor`, `propietario`, el constructor, el evento `ValorCambiado`, el error `NoAutorizado` y dos funciones con `TODO`. Completá:
+
+1. `incrementar()`: aumentar `valor` en uno y emitir `ValorCambiado` con el llamador y el nuevo valor.
+2. `reiniciar()`: comprobar que `msg.sender` sea `propietario`. Si no lo es, revertir con `NoAutorizado`. Si lo es, fijar `valor` en cero y emitir el evento.
+
+El error `PendienteDeImplementacion` marca la plantilla inicial. Quitá sus llamadas de las funciones que completaste. Podés usar [el simulador de la lectura](https://grupo-gemis.github.io/blockchain-curso-2026/encuentro-02.html#simulador-02) para anticipar el resultado; la prueba del contrato será la comprobación real del programa.
+
+## 3. Compilar y probar
+
+Desde la carpeta `laboratorio` del repositorio:
 
 ```sh
+npm ci
 npm run compilar
 npm test -- Contador
 ```
 
-## Trabajo autónomo
+`npm ci` instala las versiones fijadas por el proyecto. La compilación comprueba que Solidity entienda el archivo; la prueba ejecuta el contrato y verifica estado, evento y permiso. Al comenzar, es esperable que la prueba falle porque la plantilla revierte con `PendienteDeImplementacion`. Después de implementar ambas funciones, el caso `Contador` debe pasar.
 
-1. Abrí laboratorio/contracts/Contador.sol en el repositorio. Identificá los datos de estado, el constructor y las funciones pendientes.
-2. Completá incrementar para sumar uno y emitir el nuevo valor. Completá el control de reiniciar usando msg.sender.
-3. Compilá y desplegá desde la primera cuenta. Registrá el valor inicial.
-4. Ejecutá incrementar dos veces y comprobá el estado y los eventos.
-5. Cambiá a otra cuenta e intentá reiniciar. Volvé a la cuenta propietaria y repetí. Explicá la diferencia.
+Si falla, leé el mensaje completo y distinguí entre un error de compilación y una expectativa de prueba incumplida. Comprobá la cuenta que realizó cada llamada y el valor que quedó guardado después del intento sin permiso.
 
-## Evidencia
+## Evidencia y comprobación
 
-Código compilable, tabla de cinco operaciones con cuenta, resultado esperado y observado, y reflexión personal sobre la dificultad.
-
-## Criterios de comprobación
-
-- El valor inicial es cero y dos incrementos dejan dos.
-- Una cuenta no autorizada no reinicia el contador.
-- La cuenta propietaria puede reiniciarlo.
+Entregá el código y una tabla con las cinco observaciones: estado inicial, dos incrementos, reinicio rechazado y reinicio autorizado. Incluí el resultado de la prueba y una breve explicación de por qué el rechazo conserva el valor. No incluyas cuentas o claves de uso real.
 
 ## Extensión
 
-Agregá incrementarEn(uint256 cantidad) con una condición que rechace cero. Escribí casos de prueba para ambas ramas.
-
-## Material relacionado
-
-- [Apunte de la unidad](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-03.html)
-- [Actividad de aplicación](../../actividades/unidad-03.md)
-- [Preparación del laboratorio](../../laboratorio/README.md)
+Agregá `incrementarEn(uint256 cantidad)` con una condición que rechace cero. Escribí una prueba para una cantidad positiva y otra que compruebe el rechazo de cero.

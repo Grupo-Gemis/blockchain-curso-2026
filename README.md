@@ -4,6 +4,10 @@
 
 Los HTML integran teoría, ejemplos, gráficos y actividades. Cada archivo incluye sus imágenes y su navegación. **Lectura** muestra el documento completo. **Presentación** permite avanzar por secciones con botones o flechas del teclado. Los gráficos se pueden ampliar. La impresión incluye todo el contenido.
 
+## Presentación de la asignatura
+
+[Introducción al curso](https://grupo-gemis.github.io/blockchain-curso-2026/introduccion.html): qué se aprende en las diez unidades, por qué se estudia cada tema y cómo se conecta con los demás. Incluye el mapa del recorrido, el caso de certificados y las vistas de lectura y presentación.
+
 ## Encuentros
 
 | Encuentro | Unidades | Material |
