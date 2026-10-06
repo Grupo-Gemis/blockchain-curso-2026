@@ -16,12 +16,12 @@ La primera instalación y la descarga inicial del compiler necesitan Internet. p
 
 ## Recorrido de implementación
 
-| Unidad | Archivo para completar | Comprobación |
-|---|---|---|
-| 03 | contracts/Contador.sol | npm test -- Contador |
-| 05 | ui/cliente.js | npm test -- Interfaz |
-| 08 | contracts/TokenAula.sol | npm test -- ERC20 |
-| 09 | contracts/Bovedas.sol, BovedaSegura | npm test -- Boveda |
+| Unidad | Archivo para completar              | Comprobación         |
+| ------ | ----------------------------------- | -------------------- |
+| 03     | contracts/Contador.sol              | npm test -- Contador |
+| 05     | ui/cliente.js                       | npm test -- Interfaz |
+| 08     | contracts/TokenAula.sol             | npm test -- ERC20    |
+| 09     | contracts/Bovedas.sol, BovedaSegura | npm test -- Boveda   |
 
 `npm test` ejecuta todos los casos. Antes de completar las cuatro implementaciones es normal que fallen los casos pendientes. Las pruebas son especificaciones observables del comportamiento requerido.
 

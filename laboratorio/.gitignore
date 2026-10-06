@@ -4,3 +4,4 @@ cache/
 .env
 ui/despliegue.json
 resultados/
+.vscode/
