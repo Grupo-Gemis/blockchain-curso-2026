@@ -260,7 +260,11 @@ body.toc-hidden:not(.presentation) .intro-flow-figure{width:min(1120px,calc(100v
   function mode(value, {scroll = true, mapChapter = true} = {}) {
     if (value === isPresentation) return
     if (value) {
-      const chapter = chapters.find(c => c.getBoundingClientRect().bottom > 150) ?? chapters[0]
+      const anchored = chapterById.get(location.hash.slice(1))
+      const bounds = anchored?.getBoundingClientRect()
+      const chapter = bounds && bounds.bottom > 150 && bounds.top < innerHeight
+        ? anchored
+        : chapters.find(c => c.getBoundingClientRect().bottom > 150) ?? chapters[0]
       readingPosition = {top: window.scrollY, hash: location.hash}
       if (mapChapter) current = slideById.get(chapter.dataset.slide) ?? current
     }

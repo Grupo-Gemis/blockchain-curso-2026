@@ -211,7 +211,7 @@ body.toc-hidden:not(.presentation) .class1-illustration{width:min(1120px,calc(10
 .unit-slide .table-scroll{overflow-x:auto}
 .unit-slide table{font-size:1rem;line-height:1.5}
 .unit-slide caption{text-align:left;font-weight:700;margin-bottom:12px}
-.unit-slide .class1-illustration{max-width:1100px;margin:20px auto}
+.unit-slide .class1-illustration{position:static;left:auto;transform:none;width:100%;max-width:1100px;margin:20px auto}
 .unit-slide .class1-illustration img{max-height:58dvh;object-fit:contain}
 .unit-slide .class1-illustration figcaption{font-size:.8rem;line-height:1.6}
 .unit-slide pre{font-size:1rem;line-height:1.5;white-space:pre;overflow-x:auto;max-height:none}
@@ -324,7 +324,11 @@ body.toc-hidden:not(.presentation) .class1-illustration{width:min(1120px,calc(10
   function mode(value, {scroll = true, mapChapter = true} = {}) {
     if (value === isPresentation) return
     if (value) {
-      const chapter = chapters.find(c => c.getBoundingClientRect().bottom > 150) ?? chapters[0]
+      const anchored = chapterById.get(location.hash.slice(1))
+      const bounds = anchored?.getBoundingClientRect()
+      const chapter = bounds && bounds.bottom > 150 && bounds.top < innerHeight
+        ? anchored
+        : chapters.find(c => c.getBoundingClientRect().bottom > 150) ?? chapters[0]
       readingPosition = {top: window.scrollY, hash: location.hash}
       if (mapChapter) current = slideById.get(chapter.dataset.slide) ?? current
     }
