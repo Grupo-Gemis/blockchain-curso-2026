@@ -1,6 +1,6 @@
 # Unidad 02 · Wallets y resultado de una transacción
 
-En el [encuentro 02](https://grupo-gemis.github.io/blockchain-curso-2026/encuentro-02.html) Ana utiliza una cuenta de Ethereum. Esta práctica distingue quién puede firmar, qué red se consulta y qué muestra un recibo. Se trabaja con datos del repositorio; no hace falta crear una cuenta ni conectarse a una red pública.
+En la [unidad 02](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-02.html) Ana utiliza una cuenta de Ethereum. Esta práctica distingue quién puede firmar, qué red se consulta y qué muestra un recibo. Se trabaja con datos del repositorio. No hace falta crear una cuenta ni conectarse a una red pública.
 
 ## 1. Comparar tres maneras de operar
 
@@ -16,7 +16,7 @@ La custodia y la conectividad responden preguntas diferentes. En el caso C sabem
 
 ## 2. Leer el archivo de práctica
 
-Abrí [datos/transaccion-ejemplo.json](../../laboratorio/datos/transaccion-ejemplo.json). Desde la carpeta `laboratorio`, la ruta es `datos/transaccion-ejemplo.json`. El contenido es un **recibo ficticio** con datos consistentes para practicar. Su campo `hash` es un marcador; no se busca en un explorador.
+Abrí [datos/transaccion-ejemplo.json](../../laboratorio/datos/transaccion-ejemplo.json). Desde la carpeta `laboratorio`, la ruta es `datos/transaccion-ejemplo.json`. El contenido es un **recibo ficticio** con datos consistentes para practicar. Su campo `hash` es un marcador. No se busca en un explorador.
 
 Prepará una ficha que responda:
 
@@ -26,7 +26,7 @@ Prepará una ficha que responda:
 4. ¿Cuánto recibe el destinatario y cuánto gasta en total el emisor? Mantené separados el valor transferido y la comisión.
 5. Si una wallet hubiera cancelado la firma antes del envío, ¿habría un receipt para esa solicitud?
 
-Para interpretar el resultado, consultá la explicación de [receipt y comisión](https://grupo-gemis.github.io/blockchain-curso-2026/encuentro-02.html#lectura-02-recibo). Como extensión, podés elegir una transacción pública de Sepolia y registrar su URL, red y fecha de consulta. Esa operación es distinta del archivo de práctica.
+Para interpretar el resultado, consultá la explicación de [receipt y comisión](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-02.html#lectura-02-recibo). Como extensión, podés elegir una transacción pública de Sepolia y registrar su URL, red y fecha de consulta. Esa operación es distinta del archivo de práctica.
 
 ## Evidencia y comprobación
 

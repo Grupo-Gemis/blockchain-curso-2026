@@ -1,6 +1,6 @@
 # Unidad 03 · Contador con propietario y eventos
 
-El [encuentro 02](https://grupo-gemis.github.io/blockchain-curso-2026/encuentro-02.html#lectura-02-contrato) explica qué estado conserva un smart contract y cómo comprueba permisos. Ahora vas a completar un contador que permite incrementar a cualquier cuenta y reservar el reinicio a quien lo desplegó. Todo se ejecuta en el entorno local del curso.
+La [unidad 03](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-03.html#lectura-02-contrato) explica qué estado conserva un smart contract y cómo comprueba permisos. Ahora vas a completar un contador que permite incrementar a cualquier cuenta y reservar el reinicio a quien lo desplegó. Todo se ejecuta en el entorno local del curso.
 
 ## 1. Predecir el comportamiento
 
@@ -13,7 +13,7 @@ Abrí [laboratorio/contracts/Contador.sol](../../laboratorio/contracts/Contador.
 1. `incrementar()`: aumentar `valor` en uno y emitir `ValorCambiado` con el llamador y el nuevo valor.
 2. `reiniciar()`: comprobar que `msg.sender` sea `propietario`. Si no lo es, revertir con `NoAutorizado`. Si lo es, fijar `valor` en cero y emitir el evento.
 
-El error `PendienteDeImplementacion` marca la plantilla inicial. Quitá sus llamadas de las funciones que completaste. Podés usar [el simulador de la lectura](https://grupo-gemis.github.io/blockchain-curso-2026/encuentro-02.html#simulador-02) para anticipar el resultado; la prueba del contrato será la comprobación real del programa.
+El error `PendienteDeImplementacion` marca la plantilla inicial. Quitá sus llamadas de las funciones que completaste. Podés usar [el simulador de la lectura](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-03.html#simulador-02) para anticipar el resultado. La prueba del contrato será la comprobación real del programa.
 
 ## 3. Compilar y probar
 
@@ -25,7 +25,7 @@ npm run compilar
 npm test -- Contador
 ```
 
-`npm ci` instala las versiones fijadas por el proyecto. La compilación comprueba que Solidity entienda el archivo; la prueba ejecuta el contrato y verifica estado, evento y permiso. Al comenzar, es esperable que la prueba falle porque la plantilla revierte con `PendienteDeImplementacion`. Después de implementar ambas funciones, el caso `Contador` debe pasar.
+`npm ci` instala las versiones fijadas por el proyecto. La compilación comprueba que Solidity entienda el archivo. La prueba ejecuta el contrato y verifica estado, evento y permiso. Al comenzar, es esperable que la prueba falle porque la plantilla revierte con `PendienteDeImplementacion`. Después de implementar ambas funciones, el caso `Contador` debe pasar.
 
 Si falla, leé el mensaje completo y distinguí entre un error de compilación y una expectativa de prueba incumplida. Comprobá la cuenta que realizó cada llamada y el valor que quedó guardado después del intento sin permiso.
 

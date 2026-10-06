@@ -8,17 +8,20 @@ Los HTML integran teoría, ejemplos, gráficos y actividades. Cada archivo inclu
 
 [Introducción al curso](https://grupo-gemis.github.io/blockchain-curso-2026/introduccion.html): qué se aprende en las diez unidades, por qué se estudia cada tema y cómo se conecta con los demás. Incluye el mapa del recorrido, el caso de certificados y las vistas de lectura y presentación.
 
-## Encuentros
+## Material por unidad
 
-| Encuentro | Unidades | Material |
-|---|---|---|
-| 1 | 1 | [HTML](https://grupo-gemis.github.io/blockchain-curso-2026/encuentro-01.html) |
-| 2 | 2 y 3 | [HTML](https://grupo-gemis.github.io/blockchain-curso-2026/encuentro-02.html) |
-| 3 | 4 y 5 | [HTML](https://grupo-gemis.github.io/blockchain-curso-2026/encuentro-03.html) |
-| 4 | 6 y 7 | [HTML](https://grupo-gemis.github.io/blockchain-curso-2026/encuentro-04.html) |
-| 5 | 8 | [HTML](https://grupo-gemis.github.io/blockchain-curso-2026/encuentro-05.html) |
-| 6 | 9 y 10 | [HTML](https://grupo-gemis.github.io/blockchain-curso-2026/encuentro-06.html) |
-| 7 | Integración y consultas | [HTML](https://grupo-gemis.github.io/blockchain-curso-2026/encuentro-07.html) |
+El contenido se consulta por unidades. El docente indica cuáles se trabajan en cada encuentro.
+
+- [Unidad 01 · Fundamentos de blockchain](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-01.html)
+- [Unidad 02 · Ecosistemas y wallets](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-02.html)
+- [Unidad 03 · Programación en Solidity](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-03.html)
+- [Unidad 04 · Entorno local de desarrollo](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-04.html)
+- [Unidad 05 · Desarrollo de una DApp](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-05.html)
+- [Unidad 06 · Gas y costo de deployment](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-06.html)
+- [Unidad 07 · Deployment en una testnet](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-07.html)
+- [Unidad 08 · Tokens y white paper](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-08.html)
+- [Unidad 09 · Seguridad en Solidity](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-09.html)
+- [Unidad 10 · Costo por usuario y operación](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-10.html)
 
 ## Laboratorios autónomos
 
@@ -41,9 +44,9 @@ La unidad 07 agrega `npm run verificar:deployment`, que comprueba la instancia l
 
 ## Edición de los materiales
 
-Los documentos están en `docs`. Cada HTML puede editarse con un editor de texto sin instalar herramientas. El contenido se organiza en elementos `section`, con un título y párrafos. CSS y JavaScript están incluidos al comienzo y al final del archivo.
+Los documentos publicados están en `docs`. Cada HTML contiene texto, imágenes, estilos y navegación para poder consultarse completo. Las correcciones se realizan en las fuentes de autoría del curso y se regeneran los documentos.
 
-Los archivos `unidad-XX.html` permiten consultar una unidad. Los archivos `encuentro-XX.html` reúnen las unidades correspondientes. Cuando una corrección afecta a ambos, deben mantenerse sincronizados. La generación institucional conserva una fuente común para producir las dos vistas.
+Los archivos `unidad-XX.html` son la entrada principal. Las unidades 02 y 03 generan lectura y presentación desde los mismos bloques de contenido. `encuentro-02.html` conserva un acceso a esas unidades para los enlaces anteriores del aula.
 
 ## Estructura
 
