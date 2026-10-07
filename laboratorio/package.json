@@ -12,6 +12,7 @@
     "compilar": "hardhat build",
     "nodo": "hardhat node --network hardhatMainnet --hostname 127.0.0.1",
     "desplegar": "node scripts/desplegar.mjs",
+    "consultar": "node scripts/consultar.mjs",
     "interfaz": "node scripts/interfaz.mjs",
     "medir": "node scripts/medir.mjs",
     "test": "node scripts/probar.mjs",

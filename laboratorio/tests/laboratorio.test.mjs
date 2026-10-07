@@ -25,3 +25,46 @@ test('Deployment: creación, lectura y rechazo de un registro cruzado', async()=
  await assert.rejects(()=>verificarDeployment(p,{...registro,contador:otraDireccion},artifact),/receipt/);
  await assert.rejects(()=>verificarDeployment(p,registro,{...artifact,bytecode:'0x00'}),/bytecode/);
 });
+test('Interfaz: espera el recibo y lo devuelve sin anticipar éxito', async () => {
+  const estados = []
+  let resolverRecibo, avisarEspera
+  const reciboPendiente = new Promise(resolve => { resolverRecibo = resolve })
+  const esperaIniciada = new Promise(resolve => { avisarEspera = resolve })
+  const recibo = {status: 1, hash: '0x-prueba'}
+  const resultado = enviarYConfirmar(async () => ({
+    hash: '0x-prueba',
+    wait: () => { avisarEspera(); return reciboPendiente }
+  }), s => estados.push(s))
+  await esperaIniciada
+  assert.equal(estados.length, 2)
+  assert.match(estados[0], /firma|solicitud/i)
+  assert.match(estados[1], /Pendiente.*0x-prueba/)
+  assert.ok(!estados.some(s => /Confirmada/.test(s)))
+  resolverRecibo(recibo)
+  assert.equal(await resultado, recibo)
+  assert.equal(estados.length, 3)
+  assert.match(estados[2], /Confirmada.*0x-prueba/)
+})
+for (const [nombre, recibo] of [['status fallido', {status: 0}], ['recibo ausente', null]]) {
+  test('Interfaz: rechaza ' + nombre + ' sin anunciar confirmación', async () => {
+    const estados = []
+    await assert.rejects(() => enviarYConfirmar(async () => ({
+      hash: '0x-prueba', wait: async () => recibo
+    }), s => estados.push(s)))
+    assert.ok(!estados.some(s => /Confirmada/.test(s)))
+  })
+}
+test('Interfaz: propaga errores de la espera', async () => {
+  const estados = [], error = new Error('Fallo de espera de recibo')
+  await assert.rejects(() => enviarYConfirmar(async () => ({
+    hash: '0x-prueba', wait: async () => { throw error }
+  }), s => estados.push(s)), e => e === error)
+  assert.equal(estados.length, 2)
+  assert.ok(!estados.some(s => /Confirmada/.test(s)))
+})
+test('Interfaz: una firma rechazada no produce un envío pendiente', async () => {
+  const estados = [], error = new Error('Firma cancelada por la persona')
+  await assert.rejects(() => enviarYConfirmar(async () => { throw error }, s => estados.push(s)), e => e === error)
+  assert.equal(estados.length, 1)
+  assert.ok(!estados.some(s => /Pendiente|Confirmada/.test(s)))
+})

@@ -39,10 +39,14 @@ Terminal 2:
 
 ```sh
 npm run desplegar
+npm run consultar
+npm run verificar:deployment
 npm run interfaz
 ```
 
-Abrí http://127.0.0.1:4173. El contador necesita la implementación de la unidad 03. Las escrituras de la UI necesitan la función de la unidad 05. Reiniciar el nodo puede borrar su estado. En ese caso hay que desplegar de nuevo y recargar la interfaz.
+El despliegue crea solo Contador y actualiza `ui/despliegue.json`. La consulta muestra propietario y valor en esa terminal. Abrí http://127.0.0.1:4173 para usar la interfaz. El contador necesita la implementación de la unidad 03 y las escrituras de la UI necesitan la función de la unidad 05.
+
+La práctica obligatoria utiliza el selector A/B y **Conectar cuenta local**. Una wallet externa es una extensión opcional. Cambiar el selector invalida la conexión hasta reconectar. Reiniciar el nodo borra su estado en esta configuración. Consultá el registro anterior antes de redesplegar para observar la ausencia de código. Luego desplegá, verificá y recargá la interfaz. La dirección puede repetirse, con un estado nuevo.
 
 ## Comandos adicionales
 
@@ -90,4 +94,8 @@ El envío requiere saldo de testnet. Solo se realiza si hay un RPC y un faucet g
 - PendienteDeImplementacion: completar la función indicada en el enunciado.
 - NoAutorizado al reiniciar con otra cuenta: rechazo esperado.
 
-Los tests inician y cierran su propio nodo en el puerto 18545. No utilizan el nodo de la interfaz en 8545.
+Los tests inician y cierran su propio nodo en el puerto 18545. No utilizan el nodo de la interfaz en 8545. El resultado de `hardhat build` se ve en la terminal y en `artifacts/`. Compilar no crea una instancia en la red.
+
+## Alcance de las comprobaciones
+
+Los tests de Contador comprueban sus transiciones y permisos. Los de Interfaz prueban el helper con transacciones y recibos simulados, incluida la espera efectiva. El flujo completo de la página se comprueba con la matriz del [laboratorio 05](../laboratorios/unidad-05/README.md). Los tests no asignan notas ni envían resultados a Moodle. El workflow de GitHub ejecuta los casos configurados en `.github/workflows/comprobaciones.yml`, que son un subconjunto de las pruebas disponibles.
