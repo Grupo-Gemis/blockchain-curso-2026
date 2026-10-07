@@ -115,7 +115,7 @@ body:not(.presentation) .toc a[aria-current="true"]{font-weight:650}
 .key-values{font-size:.82rem;margin-bottom:0}
 .key-values dt{font-weight:700;margin-top:15px}
 .key-values dd{margin:6px 0 14px;line-height:1.7;overflow-wrap:anywhere;background:white;padding:10px}
-#pow-hash{display:block;font-size:.85rem;line-height:1.8;overflow-wrap:anywhere;padding:12px;background:#f2f6fa;margin:14px 0}
+.pow-results>code{display:block;font-size:.85rem;line-height:1.8;overflow-wrap:anywhere;padding:12px;background:#f2f6fa;margin:14px 0}
 #pow-attempts,#pow-expectation{font-size:.85rem;margin:8px 0 0;color:#425d75}
 #pow-hash .hash-match{color:#0d6247;background:#d5eee1;padding-block:2px}
 #pow-hash .hash-miss{color:#922b2b;background:#fbe2e0;padding-block:2px}
@@ -290,6 +290,7 @@ body.toc-hidden:not(.presentation) .class1-illustration{width:min(1120px,calc(10
   const chapters = [...article.querySelectorAll('.chapter')]
   const slideById = new Map(panels.map((p, i) => [p.id, i]))
   const chapterById = new Map(chapters.map(c => [c.id, c]))
+  const aliases = JSON.parse(document.querySelector('#presentation-aliases')?.textContent || '{}')
   const index = document.querySelector('#indice')
   const select = document.querySelector('#section-select')
   const previous = document.querySelector('#previous')
@@ -321,7 +322,7 @@ body.toc-hidden:not(.presentation) .class1-illustration{width:min(1120px,calc(10
     if (isPresentation) setHash(panels[current].id)
     if (scroll) window.scrollTo({top: 0, behavior: 'instant'})
   }
-  function mode(value, {scroll = true, mapChapter = true} = {}) {
+  function mode(value, {scroll = true, mapChapter = true, rememberPosition = true} = {}) {
     if (value === isPresentation) return
     if (value) {
       const anchored = chapterById.get(location.hash.slice(1))
@@ -329,7 +330,7 @@ body.toc-hidden:not(.presentation) .class1-illustration{width:min(1120px,calc(10
       const chapter = bounds && bounds.bottom > 150 && bounds.top < innerHeight
         ? anchored
         : chapters.find(c => c.getBoundingClientRect().bottom > 150) ?? chapters[0]
-      readingPosition = {top: window.scrollY, hash: location.hash}
+      readingPosition = rememberPosition ? {top: window.scrollY, hash: location.hash} : null
       if (mapChapter) current = slideById.get(chapter.dataset.slide) ?? current
     }
     isPresentation = value
@@ -344,7 +345,10 @@ body.toc-hidden:not(.presentation) .class1-illustration{width:min(1120px,calc(10
       try { history.replaceState(null, '', readingPosition.hash || location.pathname + location.search) } catch {}
       if (scroll) window.scrollTo({top: readingPosition.top, behavior: 'instant'})
     } else {
-      const target = chapters.find(c => c.dataset.slide === panels[current].id) ?? chapters[0]
+      const target = [...chapters].reverse().find(c => {
+        const first = slideById.get(c.dataset.slide)
+        return Number.isInteger(first) && first <= current
+      }) ?? chapters[0]
       setHash(target.id)
       if (scroll) target.scrollIntoView({behavior: 'instant'})
     }
@@ -367,11 +371,12 @@ body.toc-hidden:not(.presentation) .class1-illustration{width:min(1120px,calc(10
     setHash(chapter.id)
     chapter.scrollIntoView({behavior: 'instant'})
   }))
-  const followHash = () => {
-    const id = location.hash.slice(1)
+  const followHash = (initial = false) => {
+    const requested = location.hash.slice(1)
+    const id = aliases[requested] ?? requested
     if (slideById.has(id)) {
       current = slideById.get(id)
-      mode(true, {mapChapter: false})
+      mode(true, {mapChapter: false, rememberPosition: !initial})
       showSlide(current)
     } else if (chapterById.has(id)) {
       mode(false, {scroll: false})
@@ -379,7 +384,7 @@ body.toc-hidden:not(.presentation) .class1-illustration{width:min(1120px,calc(10
       chapterById.get(id).scrollIntoView({behavior: 'instant'})
     }
   }
-  window.addEventListener('hashchange', followHash)
+  window.addEventListener('hashchange', () => followHash())
   let queued = false
   window.addEventListener('scroll', () => {
     if (queued || isPresentation) return
@@ -431,7 +436,7 @@ body.toc-hidden:not(.presentation) .class1-illustration{width:min(1120px,calc(10
     update()
   })
   showSlide(0, false)
-  if (location.hash) followHash()
+  if (location.hash) followHash(true)
 })()
 ;
 (() => {
