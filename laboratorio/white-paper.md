@@ -7,15 +7,15 @@
 Describir interfaz, contratos, red y datos fuera de la cadena. No publicar información personal innecesaria.
 
 ## Token y oferta
-Nombre, símbolo, estándar, utilidad, totalSupply y decimals. TokenAula implementa una emisión fija al receptor inicial; documentar la evidencia.
+Nombre, símbolo, estándar, utilidad, totalSupply y decimals. TokenAula implementa una emisión fija al receptor inicial. Documentar la evidencia.
 
 ## Distribución propuesta
 | Destino | Porcentaje | AULA | Implementado o propuesto |
 |---|---:|---:|---|
-| Comunidad | 50% | 500000 | Propuesto |
-| Equipo | 20% | 200000 | Propuesto |
-| Tesorería | 20% | 200000 | Propuesto |
-| Pruebas e incentivos | 10% | 100000 | Propuesto |
+| Incentivos de uso | 50% | 500000 | Propuesto |
+| Comunidad | 20% | 200000 | Propuesto |
+| Reserva | 20% | 200000 | Propuesto |
+| Equipo | 10% | 100000 | Propuesto |
 
 Los porcentajes no implementan vesting ni distribuyen por sí solos los tokens.
 

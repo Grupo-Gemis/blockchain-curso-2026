@@ -40,3 +40,17 @@ Agregar un costo de soporte por usuario y revisar la contribución y el punto de
 - [Apunte de la unidad](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-10.html)
 - [Actividad de aplicación](../../actividades/unidad-10.md)
 - [Preparación del laboratorio](../../laboratorio/README.md)
+
+## Escenarios y alcance de la comprobación
+
+Importá el CSV conservando sus columnas y entradas. Usá fórmulas para comisión ETH = gas × precio gwei ÷ 10^9, comisión USD = comisión ETH × USD/ETH y gas mensual = usuarios × operaciones por usuario × comisión USD. Patrocinio 1 agrega ese gas a los gastos de la organización. Patrocinio 0 lo agrega al costo individual.
+
+| Escenario | Gas total mensual USD | Costo por usuario USD | Resultado organización USD |
+|---|---:|---:|---:|
+| 20 operaciones, patrocinio 1 | 400 | 5 | 0 |
+| 20 operaciones, patrocinio 0 | 400 | 9 | 400 |
+| 40 operaciones, patrocinio 1 | 800 | 5 | -400 |
+
+La contribución es abono menos gas por usuario que asume la organización. Si es positiva, el equilibrio redondea hacia arriba costos fijos / contribución. Si es cero o negativa y hay costos fijos, no se alcanza aumentando usuarios bajo esas mismas entradas.
+
+Los tests Costos revisan las funciones del proyecto con casos de ambos pagadores, frecuencia, ausencia de usuarios y entradas inválidas. No abren ni corrigen la planilla entregada. La revisión docente verifica fórmulas, supuestos, fuentes, sensibilidad, equilibrio y conclusiones.

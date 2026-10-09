@@ -11,7 +11,7 @@ Los comandos se ejecutan desde la carpeta `laboratorio` del repositorio.
 ```sh
 npm run compilar
 npm test -- ERC20
-node scripts/token.mjs
+npm run token
 ```
 
 ## Trabajo autónomo
@@ -43,3 +43,11 @@ Diseñar, sin prometer que ya está implementado, un calendario de vesting y sus
 - [Apunte de la unidad](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-08.html)
 - [Actividad de aplicación](../../actividades/unidad-08.md)
 - [Preparación del laboratorio](../../laboratorio/README.md)
+
+## Saldos y permiso en cada paso
+
+Con el nodo activo, ejecutá `npm run token` desde laboratorio. El script crea una instancia nueva de TokenAula y muestra emisión de 1.000.000 AULA a Ana, transferencia de 10 a Bruno, aprobación de 3 y uso de 2 mediante transferFrom. Quedan Ana con 999.988, Bruno con 12 y permiso restante 1. Intenta estimar otro gasto de 2 y comprueba el rechazo sin envío ni cambios de estado.
+
+El informe está en `laboratorio/resultados/token-local.json`. Identificá llamador, origen y destino de cada transferencia. Los montos se convierten con parseUnits y los decimales del contrato. La distribución propuesta es 50% incentivos de uso, 20% comunidad, 20% reserva y 10% equipo. El constructor entrega todo al receptor y no implementa ese reparto o vesting.
+
+Los tests ERC20 comprueban emisión, escala, saldos, permisos, uso parcial y conservación después del rechazo. La revisión docente evalúa problema, utilidad, arquitectura, distribución, gobierno, riesgos, correspondencia con el código y revisión entre pares del white paper.

@@ -38,10 +38,16 @@ Informe JSON del verificador, tabla de resultados antes y después del reinicio 
 
 ## Extensión
 
-Si se dispone de un RPC y saldo de prueba gratuitos, realizar --check y luego --desplegar según el README de Sepolia. No comprar saldo, contratar servicios ni usar fondos reales. La falta de estos recursos no afecta la entrega ni su evaluación.
+Si se dispone de un RPC y saldo de prueba gratuitos, realizar --check y luego --desplegar según los pasos del apunte de la unidad 07. No comprar saldo, contratar servicios ni usar fondos reales. La falta de estos recursos no afecta la entrega ni su evaluación.
 
 ## Material relacionado
 
 - [Apunte de la unidad](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-07.html)
 - [Actividad de aplicación](../../actividades/unidad-07.md)
 - [Preparación del laboratorio](../../laboratorio/README.md)
+
+## Resultados de la extensión opcional
+
+`npm run sepolia -- --check` consulta y estima sin enviar. El modo `--desplegar` espera una creación y guarda `laboratorio/resultados/deployment-sepolia.json` con datos públicos: red, dirección, hash, bloque, resultado, cuenta creadora, propietario, valor, gas y comisión. La URL y la clave no se copian. No cambia el registro local de la DApp.
+
+Los tests `Deployment` revisan el verificador local y sus rechazos. No ejecutan la extensión ni califican la tabla o el informe escrito.

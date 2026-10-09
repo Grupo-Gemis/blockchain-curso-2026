@@ -17,7 +17,8 @@
     "medir": "node scripts/medir.mjs",
     "test": "node scripts/probar.mjs",
     "sepolia": "node --env-file=.env scripts/desplegar-sepolia.mjs",
-    "verificar:deployment": "node scripts/verificar-deployment.mjs"
+    "verificar:deployment": "node scripts/verificar-deployment.mjs",
+    "token": "node scripts/token.mjs"
   },
   "dependencies": {
     "ethers": "6.16.0",

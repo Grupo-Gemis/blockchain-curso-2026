@@ -30,3 +30,14 @@ contract ReceptorPrueba {
         if (intentos < 3) { intentos++; try objetivo.retirar() {} catch {} }
     }
 }
+
+// Fixture que permite comprobar el rechazo de una transferencia y su rollback.
+contract ReceptorRechaza {
+    IBoveda public immutable objetivo;
+    bool public rechazar = true;
+    constructor(address destino) { objetivo = IBoveda(destino); }
+    function depositar() external payable { objetivo.depositar{value:msg.value}(); }
+    function retirar() external { objetivo.retirar(); }
+    function aceptar() external { rechazar = false; }
+    receive() external payable { require(!rechazar, "Recepcion rechazada"); }
+}

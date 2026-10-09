@@ -40,3 +40,13 @@ Medir una escritura inicial y otra posterior del mismo contrato y explicar por q
 - [Apunte de la unidad](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-06.html)
 - [Actividad de aplicación](../../actividades/unidad-06.md)
 - [Preparación del laboratorio](../../laboratorio/README.md)
+
+## Leer los resultados y distinguir la corrección
+
+El script crea otra instancia de Contador para medirla. No reemplaza `ui/despliegue.json`. En la terminal se ven cuatro filas: creación, incremento 0 → 1, incremento 1 → 2 y reinicio 2 → 0. El archivo `laboratorio/resultados/gas-local.json` conserva red, dirección, settings y un campo `registros` con estados, gas usado, límite, precio, comisión y hash. Las rutas de resultados se abren desde la carpeta laboratorio.
+
+Completá el presupuesto con estos supuestos ficticios: ocho horas de trabajo a USD 20 por hora, USD 30 de preparación inicial, USD 12 de infraestructura por mes y conversión de USD 2.000 por ETH. El recibo de 0,0011 ETH daría USD 2,20, pero para presupuestar tu deployment utilizá su recibo de creación medido. Separá total inicial y gasto mensual.
+
+Importá el CSV respetando encabezado, comas como separador y la convención decimal de tu hoja. Conservá las entradas. En el modelo EIP-1559 calculá primero el mínimo entre el máximo por gas y base más propina, solo si el máximo cubre la base. Después calculá gas usado × precio efectivo ÷ 10^9 y, por separado, límite × máximo ÷ 10^9. No inventes una comisión de inclusión si la base supera el máximo.
+
+`npm test -- Costos` comprueba funciones programadas. No lee ni califica el CSV. La revisión docente comprueba fórmulas, unidades, escenarios, fuentes, explicación y presupuesto.

@@ -42,3 +42,11 @@ Agregar una pausa a una operación concreta y definir quién puede activarla, qu
 - [Apunte de la unidad](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-09.html)
 - [Actividad de aplicación](../../actividades/unidad-09.md)
 - [Preparación del laboratorio](../../laboratorio/README.md)
+
+## Qué comprueban las secuencias
+
+La prueba prepara 5 ETH de Ana y 1 ETH de un receptor propio. En la versión vulnerable el receptor obtiene 4 y la bóveda conserva 2, aunque Ana todavía tiene crédito de 5. En la segura obtiene 1 y quedan 5 para Ana. El test consulta fondos y créditos de ambos participantes.
+
+Un segundo receptor, ReceptorRechaza, rechaza recibir fondos. El test comprueba que se conserve su crédito de 1 y los fondos totales de 6. Después cambia su comportamiento y vuelve a solicitar el retiro. Debe poder recibir 1 sin afectar los 5 ajenos. Este contrato es una herramienta de prueba. No se completa como solución del ejercicio.
+
+Los tests ejecutan estas secuencias y sus afirmaciones. La revisión docente evalúa condición, impacto, evidencia, explicación del orden, corrección y alcance. Aprobar el caso BovedaVulnerable significa reproducir la falla esperada, no demostrar que esa versión sea segura.
