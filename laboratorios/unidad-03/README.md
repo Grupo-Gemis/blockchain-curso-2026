@@ -27,6 +27,10 @@ npm test -- Contador
 
 `npm ci` instala las versiones fijadas por el proyecto. La compilación comprueba que Solidity entienda el archivo. La prueba ejecuta el contrato y verifica estado, evento y permiso. Al comenzar, es esperable que la prueba falle porque la plantilla revierte con `PendienteDeImplementacion`. Después de implementar ambas funciones, el caso `Contador` debe pasar.
 
+El resumen de `hardhat build` aparece en esa terminal. El archivo `artifacts/contracts/Contador.sol/Contador.json` conserva ABI y bytecode después de una compilación válida. Compilar no crea una instancia pública ni abre una página. La plantilla puede compilar aunque sus funciones todavía reviertan.
+
+Los tests crean su propio nodo temporal en 18545 y lo cierran al terminar. No necesitan iniciar `npm run nodo` ni comparten estado con el nodo de la interfaz en 8545. Las salidas de las pruebas aparecen en la terminal. No asignan notas ni envían resultados a Moodle.
+
 Si falla, leé el mensaje completo y distinguí entre un error de compilación y una expectativa de prueba incumplida. Comprobá la cuenta que realizó cada llamada y el valor que quedó guardado después del intento sin permiso.
 
 ## Evidencia y comprobación

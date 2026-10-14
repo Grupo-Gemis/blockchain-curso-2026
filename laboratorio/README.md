@@ -48,6 +48,20 @@ El despliegue crea solo Contador y actualiza `ui/despliegue.json`. La consulta m
 
 La práctica obligatoria utiliza el selector A/B y **Conectar cuenta local**. Una wallet externa es una extensión opcional. Cambiar el selector invalida la conexión hasta reconectar. Reiniciar el nodo borra su estado en esta configuración. Consultá el registro anterior antes de redesplegar para observar la ausencia de código. Luego desplegá, verificá y recargá la interfaz. La dirección puede repetirse, con un estado nuevo.
 
+## Usar el contador desde la terminal
+
+En la unidad 04, antes de iniciar la página, la terminal 2 puede usar la instancia ya desplegada:
+
+```sh
+npm run usar:contador -- incrementar --cuenta 1
+npm run usar:contador -- incrementar --cuenta 1
+npm run consultar
+```
+
+La cuenta 0 es A, Ana. La cuenta 1 es B, Bruno. El cliente comprueba el registro de creación, envía la acción, espera el recibo y consulta el valor. No implementa las funciones pendientes del contrato. `reiniciar --cuenta 1` debe rechazarse por permiso y conservar el valor. `reiniciar --cuenta 0` solicita el reinicio autorizado de Ana.
+
+Después de iniciar `npm run interfaz`, la terminal 2 queda ocupada por ese servidor. Abrí una tercera terminal en `laboratorio` si necesitás ejecutar estos clientes mientras usás la página. La URL 4173 carga la interfaz. La 8545 identifica el RPC del nodo. El número 31337 identifica la configuración de red, no un puerto.
+
 ## Comandos adicionales
 
 ```sh

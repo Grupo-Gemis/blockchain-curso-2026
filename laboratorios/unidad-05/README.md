@@ -18,7 +18,7 @@ npm test -- Interfaz
 
 1. Completá `enviarYConfirmar` en `laboratorio/ui/cliente.js`. Debe informar solicitud de firma y envío, Pendiente con hash y Confirmada después de un recibo con status 1. Debe devolver ese recibo y propagar errores. Un recibo inexistente o fallido no permite anunciar éxito.
 2. Ejecutá `npm test -- Interfaz`. La salida se ve en la terminal. Los tests retienen una promesa pendiente para comprobar que no se anticipa éxito, verifican el recibo devuelto y ensayan errores. Sus transacciones son respuestas simuladas.
-3. En la terminal 1 ejecutá `npm run nodo`. En la terminal 2 ejecutá `npm run desplegar`, `npm run verificar:deployment` y `npm run interfaz`. Ambas terminales quedan abiertas. Abrí `http://127.0.0.1:4173`. El servidor de la página usa 4173 y el nodo RPC usa 8545.
+3. En la terminal 1 ejecutá `npm run nodo`, o conservá tu nodo propio de la unidad 04 si sigue activo. En la terminal 2 ejecutá `npm run desplegar`, `npm run verificar:deployment` y `npm run interfaz`. El nuevo deployment prepara una instancia en 0 para la matriz. `npm run interfaz` mantiene ocupada la terminal 2. Ambas terminales quedan abiertas. Abrí `http://127.0.0.1:4173`. El servidor de la página usa 4173 y el nodo RPC usa 8545.
 4. Seleccioná A y pulsá **Conectar cuenta local**. Verificá red, contrato, cuenta y valor. Pasá a B y reconectá. Incrementá dos veces, esperando cada operación. Comprobá 1 y luego 2.
 5. Con B intentá reiniciar. Registrá el rechazo y valor 2 conservado. Volvé a A, reconectá y comprobá reinicio a cero. Un rechazo al estimar gas puede ocurrir antes de obtener un hash.
 6. Observá que los botones y el selector local se deshabilitan durante una escritura. El nodo local confirma rápido. Para estudiar un período pendiente prolongado usá también la simulación del apunte.
@@ -36,6 +36,14 @@ npm test -- Interfaz
 | Cambio local | Conexión activa | Seleccionar otra cuenta | Operaciones deshabilitadas hasta reconectar. |
 | Desconexión | Nodo apagado | Actualizar | Mensaje de RPC y reconexión necesaria. |
 | Sesión nueva | Nodo reiniciado sin deployment | Conectar | Rechazo del registro por ausencia de código. |
+
+## Dos pantallas y un solo estado
+
+Después de la matriz, prepará una nueva instancia y reconectá. Abrí otra pestaña de `http://127.0.0.1:4173`, conectá y verificá que ambas leen 0. Desde una pestaña incrementá una vez. La otra puede seguir mostrando la lectura anterior hasta Actualizar. Entonces debe consultar 1. Recargar una pestaña no incrementa ni borra el contrato de esa sesión.
+
+Si querés comparar con otro cliente, abrí una terminal 3 en `laboratorio`. Las otras dos siguen ocupadas por nodo y servidor. Ejecutá `npm run usar:contador -- incrementar --cuenta 1`. Después pulsá Actualizar en la página. Ambos clientes deben reconocer la misma dirección y consultar el mismo estado. Registrá el valor previo y posterior, sin suponer que una pantalla se actualiza sola.
+
+Cerrar una pestaña deja activos los procesos. Detener solo el servidor 4173 deja el nodo 8545 activo, pero impide cargar de nuevo la página. Detener el nodo corta las consultas aunque todavía veas una página ya cargada. Distinguí estas situaciones antes de cambiar la configuración.
 
 ## Qué se comprueba automáticamente
 
@@ -61,7 +69,7 @@ Matriz con los siete casos mínimos, precondición, actor, acción, resultado es
 
 ## Extensión
 
-Agregar un control incrementarEn y mantener la misma gestión de estados y errores.
+Si completaste la extensión `incrementarEn` del laboratorio 03, agregá su control en la interfaz y mantené la misma gestión de estados y errores. El contrato básico no incluye esa función.
 
 ## Material relacionado
 

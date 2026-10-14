@@ -32,6 +32,10 @@ Para interpretar el resultado, consultá la explicación de [receipt y comisión
 
 Entregá la tabla de tres casos y la ficha del recibo con la cuenta completa. La ficha debe identificar la red local `31337`, separar el valor de la comisión y explicar por qué obtener un hash al enviar todavía no garantiza éxito. No adjuntes claves privadas ni recovery phrases.
 
+## Qué se comprueba y qué se interpreta
+
+La calculadora del [apunte](https://grupo-gemis.github.io/blockchain-curso-2026/unidad-02.html#calculadora-02) permite contrastar la cuenta. No evalúa la ficha ni envía una nota. No hace falta iniciar Hardhat para trabajar con este JSON: son datos ficticios guardados en disco, no una consulta al nodo. La comparación de custodia, la lectura de campos y la explicación requieren revisión docente.
+
 ## Extensión
 
 Para una organización con dos responsables, describí quién propone una operación, quién la aprueba y qué procedimiento seguirían si uno pierde su dispositivo. Evaluá si un esquema de firmas múltiples ayuda con ese proceso.

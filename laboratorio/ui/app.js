@@ -17,7 +17,17 @@ function invalidar() {
   $('red').textContent = 'Reconexión necesaria'
   habilitar()
 }
-const mensajeError = e => e.revert?.name || e.shortMessage || e.message
+function mensajeError(e, instancia = contrato) {
+  if (e.revert?.name) return e.revert.name
+  const datos = e.data || e.info?.error?.data?.data || e.info?.error?.data
+  if (e.code === 'CALL_EXCEPTION' && typeof datos === 'string' && instancia) {
+    try {
+      const rechazo = instancia.interface.parseError(datos)
+      if (rechazo) return rechazo.name
+    } catch {}
+  }
+  return e.shortMessage || e.message
+}
 const falloRPC = e => ['NETWORK_ERROR','SERVER_ERROR','TIMEOUT'].includes(e.code) ||
   /ECONNREFUSED|Failed to fetch|fetch failed|NetworkError/i.test(e.message || '') ||
   e.info?.error?.code === 'ECONNREFUSED'
@@ -99,7 +109,7 @@ for (const [id, metodo] of [['sumar','incrementar'], ['reset','reiniciar']]) $(i
       if (falloRPC(e) || recibo) invalidar()
       estado(recibo ? 'Transacción confirmada. No se pudo actualizar la lectura. Reconectá y consultá antes de reenviar.' :
         falloRPC(e) ? 'No se pudo completar la operación por el RPC. Comprobá su resultado antes de reenviar y reconectá.' :
-        `Operación rechazada o fallida: ${mensajeError(e)}`)
+        `Operación rechazada o fallida: ${mensajeError(e, instancia)}`)
     }
   } finally {
     if (version === contexto) { ocupado = false; habilitar() }
