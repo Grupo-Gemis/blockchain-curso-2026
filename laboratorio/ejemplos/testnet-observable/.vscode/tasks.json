@@ -1,0 +1,7 @@
+{"version":"2.0.0","tasks":[
+ {"label":"01 · Instalar dependencias","type":"shell","command":"npm ci","problemMatcher":[]},
+ {"label":"02 · Compilar Contador","type":"shell","command":"npm run compilar","problemMatcher":[]},
+ {"label":"03 · Probar recorrido local","type":"shell","command":"npm test","problemMatcher":[]},
+ {"label":"04 · Mantener nodo de ensayo","type":"shell","command":"npm run nodo","problemMatcher":[],"presentation":{"panel":"dedicated"}},
+ {"label":"05 · Mantener interfaz","type":"shell","command":"npm run interfaz","problemMatcher":[],"presentation":{"panel":"dedicated"}}
+]}

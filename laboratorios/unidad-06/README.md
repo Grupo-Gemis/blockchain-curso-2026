@@ -50,3 +50,11 @@ Completá el presupuesto con estos supuestos ficticios: ocho horas de trabajo a 
 Importá el CSV respetando encabezado, comas como separador y la convención decimal de tu hoja. Conservá las entradas. En el modelo EIP-1559 calculá primero el mínimo entre el máximo por gas y base más propina, solo si el máximo cubre la base. Después calculá gas usado × precio efectivo ÷ 10^9 y, por separado, límite × máximo ÷ 10^9. No inventes una comisión de inclusión si la base supera el máximo.
 
 `npm test -- Costos` comprueba funciones programadas. No lee ni califica el CSV. La revisión docente comprueba fórmulas, unidades, escenarios, fuentes, explicación y presupuesto.
+
+## Práctica conjunta de las unidades 06 y 07
+
+La [guía completa de gas, transacciones e historia](../../laboratorio/ejemplos/testnet-observable/GUIA-06-07.md) continúa el contador de 04/05. Desde laboratorio, ejecutá npm run preparar:testnet y seguí EMPEZAR-AQUI.md de la copia. El código está completo y los ejercicios originales se conservan.
+
+Primero ensayamos localmente. Luego el docente guía la creación en Sepolia, los incrementos, la comisión efectiva, la reversión incluida, la consulta desde otra computadora, la historia y el seguimiento de finalización. Quienes no firman pueden observar desde el explorador. La entrega local conserva los criterios anteriores cuando no hay recursos públicos gratuitos.
+
+La evidencia adicional distingue red local y Sepolia. Incluye tabla de operaciones, recibos y JSON de observaciones, más una explicación de qué permiten comprobar dos accesos RPC y qué requiere observar el consenso. Los tests locales no acreditan haber ejecutado la parte pública.

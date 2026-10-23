@@ -51,3 +51,11 @@ Si se dispone de un RPC y saldo de prueba gratuitos, realizar --check y luego --
 `npm run sepolia -- --check` consulta y estima sin enviar. El modo `--desplegar` espera una creación y guarda `laboratorio/resultados/deployment-sepolia.json` con datos públicos: red, dirección, hash, bloque, resultado, cuenta creadora, propietario, valor, gas y comisión. La URL y la clave no se copian. No cambia el registro local de la DApp.
 
 Los tests `Deployment` revisan el verificador local y sus rechazos. No ejecutan la extensión ni califican la tabla o el informe escrito.
+
+## Práctica conjunta de las unidades 06 y 07
+
+La [guía completa de gas, transacciones e historia](../../laboratorio/ejemplos/testnet-observable/GUIA-06-07.md) continúa el contador de 04/05. Desde laboratorio, ejecutá npm run preparar:testnet y seguí EMPEZAR-AQUI.md de la copia. El código está completo y los ejercicios originales se conservan.
+
+Primero ensayamos localmente. Luego el docente guía la creación en Sepolia, los incrementos, la comisión efectiva, la reversión incluida, la consulta desde otra computadora, la historia y el seguimiento de finalización. Quienes no firman pueden observar desde el explorador. La entrega local conserva los criterios anteriores cuando no hay recursos públicos gratuitos.
+
+La evidencia adicional distingue red local y Sepolia. Incluye tabla de operaciones, recibos y JSON de observaciones, más una explicación de qué permiten comprobar dos accesos RPC y qué requiere observar el consenso. Los tests locales no acreditan haber ejecutado la parte pública.

@@ -19,7 +19,8 @@
     "test": "node scripts/probar.mjs",
     "sepolia": "node --env-file=.env scripts/desplegar-sepolia.mjs",
     "verificar:deployment": "node scripts/verificar-deployment.mjs",
-    "token": "node scripts/token.mjs"
+    "token": "node scripts/token.mjs",
+    "preparar:testnet": "node scripts/preparar-testnet.mjs"
   },
   "dependencies": {
     "ethers": "6.16.0",

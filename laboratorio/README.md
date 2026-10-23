@@ -113,3 +113,7 @@ Los tests inician y cierran su propio nodo en el puerto 18545. No utilizan el no
 ## Alcance de las comprobaciones
 
 Los tests de Contador comprueban sus transiciones y permisos. Los de Interfaz prueban el helper con transacciones y recibos simulados, incluida la espera efectiva. El flujo completo de la página se comprueba con la matriz del [laboratorio 05](../laboratorios/unidad-05/README.md). Los tests no asignan notas ni envían resultados a Moodle. El workflow de GitHub ejecuta los casos configurados en `.github/workflows/comprobaciones.yml`, que son un subconjunto de las pruebas disponibles.
+
+## Práctica conjunta de gas y red pública · Unidades 06 y 07
+
+Ejecutá npm run preparar:testnet y abrí EMPEZAR-AQUI.md de la carpeta que informa el comando. Incluye el contador completo, ensayo local, conexión de wallet a Sepolia, costo efectivo, seguimiento de inclusión y finalización, eventos y valores históricos. La copia utiliza puertos propios y conserva los ejercicios originales. La parte pública se prepara con el docente y saldo gratuito. No condiciona la aprobación individual. La guía completa se conserva en ejemplos/testnet-observable/GUIA-06-07.md.
