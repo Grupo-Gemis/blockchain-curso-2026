@@ -57,8 +57,7 @@ Los archivos `unidad-XX.html` son la entrada principal. Las unidades 02 y 03 gen
 
 Las plantillas CSV se abren en Google Sheets, LibreOffice o Excel. Las filas de resultado se completan con fórmulas a partir del enunciado.
 
-## Práctica conjunta de gas y testnet · Unidades 06 y 07
 
-La [guía de inicio](laboratorio/ejemplos/testnet-observable/EMPEZAR-AQUI.md) prepara una copia completa del contador y su DApp para observar gas, comisión, recibos, confirmaciones, finalización e historia. Desde la carpeta laboratorio, ejecutá `npm run preparar:testnet` y seguí EMPEZAR-AQUI.md de la copia.
+## Integrar las diez unidades
 
-Primero se ensaya en local. La parte pública en Sepolia se realiza con el docente y saldo de prueba gratuito, mediante wallet. No condiciona la aprobación individual. El código está completo y conserva los ejercicios originales.
+El [caso de certificados](https://grupo-gemis.github.io/blockchain-curso-2026/integracion.html) reúne lectura y presentación. La [práctica guiada](laboratorios/integracion-certificados/README.md) permite comprobar documentos, registros, permisos, disponibilidad y costos. El código se entrega completo y las evidencias se reutilizan entre unidades.

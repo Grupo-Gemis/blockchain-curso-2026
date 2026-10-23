@@ -1,6 +1,29 @@
 # Laboratorio de Blockchain & Smart Contracts
 
-Código inicial y herramientas para las diez unidades del curso. Los contratos con TODO se completan progresivamente. Un test que falla con `PendienteDeImplementacion` señala trabajo aún no realizado.
+Herramientas para las diez unidades del curso. **Las unidades 04 y 05 se realizan como prácticas guiadas con código completo.** No requieren resolver primero los ejercicios de programación.
+
+## Empezar las prácticas guiadas 04 y 05
+
+Desde esta carpeta, con Node.js 24:
+
+```sh
+npm run preparar:guiado
+cd practicas/unidades-04-05
+npm ci
+npm run verificar
+npm run compilar
+npm test
+```
+
+El primer comando funciona antes de instalar dependencias. Crea una copia con Contador y enviarYConfirmar completos. No sobrescribe trabajos anteriores. Todos los comandos siguientes se ejecutan en esa copia. Su npm test comprueba ocho casos de Contador, Interfaz y Deployment. No exige completar funciones de otras unidades.
+
+Seguí el [laboratorio 04](../laboratorios/unidad-04/README.md) y después el [laboratorio 05](../laboratorios/unidad-05/README.md). Cada paso explica qué hacer, qué ocurre detrás, qué observar y cómo comprobarlo. La misma copia sirve para la demostración docente.
+
+Si necesitás otro ensayo, desde la carpeta laboratorio original usá npm run preparar:guiado -- --nombre demostracion-2 y trabajá en practicas/demostracion-2. Las copias existentes no se sobrescriben. Guardá el informe de entrega fuera de esas carpetas locales.
+
+## Ejercicios de programación y demás unidades
+
+La carpeta original conserva los ejercicios con TODO de las unidades 03, 08 y 09. Un test que falla con PendienteDeImplementacion allí señala trabajo aún no realizado. La función pendiente original de ui/cliente.js se conserva como ejercicio adicional, pero no es requisito del laboratorio guiado 05. Las instrucciones generales siguientes corresponden a esa carpeta original.
 
 ## Instalación
 
@@ -19,7 +42,7 @@ La primera instalación y la descarga inicial del compiler necesitan Internet. p
 | Unidad | Archivo para completar | Comprobación |
 |---|---|---|
 | 03 | contracts/Contador.sol | npm test -- Contador |
-| 05 | ui/cliente.js | npm test -- Interfaz |
+| Adicional de 05 | ui/cliente.js | npm test -- Interfaz |
 | 08 | contracts/TokenAula.sol | npm test -- ERC20 |
 | 09 | contracts/Bovedas.sol, BovedaSegura | npm test -- Boveda |
 
@@ -113,6 +136,12 @@ Los tests inician y cierran su propio nodo en el puerto 18545. No utilizan el no
 ## Alcance de las comprobaciones
 
 Los tests de Contador comprueban sus transiciones y permisos. Los de Interfaz prueban el helper con transacciones y recibos simulados, incluida la espera efectiva. El flujo completo de la página se comprueba con la matriz del [laboratorio 05](../laboratorios/unidad-05/README.md). Los tests no asignan notas ni envían resultados a Moodle. El workflow de GitHub ejecuta los casos configurados en `.github/workflows/comprobaciones.yml`, que son un subconjunto de las pruebas disponibles.
+
+
+## Caso integrador con código completo
+
+El comando npm run preparar:certificados crea una copia en practicas/certificados. Abrí EMPEZAR-AQUI.md de esa copia. Incluye contrato, interfaz, documentos ficticios y tareas numeradas de VS Code. El preparador conserva las copias previas. El nodo de esta aplicación usa 19645, la interfaz 4273 y las pruebas 19646. El contador de 04/05 conserva su propia carpeta y sus servicios.
+
 
 ## Práctica conjunta de gas y red pública · Unidades 06 y 07
 

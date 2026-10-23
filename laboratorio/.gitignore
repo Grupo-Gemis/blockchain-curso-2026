@@ -4,4 +4,6 @@ cache/
 .env
 ui/despliegue.json
 resultados/
+
+# Copias locales de ejecución. No son fuentes para publicar.
 practicas/

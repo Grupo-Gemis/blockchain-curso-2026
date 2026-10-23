@@ -40,3 +40,8 @@ Entregá el código y una tabla con las cinco observaciones: estado inicial, dos
 ## Extensión
 
 Agregá `incrementarEn(uint256 cantidad)` con una condición que rechace cero. Escribí una prueba para una cantidad positiva y otra que compruebe el rechazo de cero.
+
+
+## Continuación con registros y estados
+
+Después del contador, la unidad explica RegistroCertificados con código completo. La práctica de predicción de dos huellas se incorpora a la matriz del [caso integrador](../integracion-certificados/README.md). No se pide completar otro contrato. Identificá qué agrupa struct, qué asocia mapping y qué valores admite enum.

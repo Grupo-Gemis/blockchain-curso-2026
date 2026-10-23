@@ -52,6 +52,7 @@ Si se dispone de un RPC y saldo de prueba gratuitos, realizar --check y luego --
 
 Los tests `Deployment` revisan el verificador local y sus rechazos. No ejecutan la extensión ni califican la tabla o el informe escrito.
 
+
 ## Práctica conjunta de las unidades 06 y 07
 
 La [guía completa de gas, transacciones e historia](../../laboratorio/ejemplos/testnet-observable/GUIA-06-07.md) continúa el contador de 04/05. Desde laboratorio, ejecutá npm run preparar:testnet y seguí EMPEZAR-AQUI.md de la copia. El código está completo y los ejercicios originales se conservan.

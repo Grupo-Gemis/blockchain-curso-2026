@@ -20,6 +20,8 @@
     "sepolia": "node --env-file=.env scripts/desplegar-sepolia.mjs",
     "verificar:deployment": "node scripts/verificar-deployment.mjs",
     "token": "node scripts/token.mjs",
+    "preparar:guiado": "node scripts/preparar-guiado.mjs",
+    "preparar:certificados": "node scripts/preparar-certificados.mjs",
     "preparar:testnet": "node scripts/preparar-testnet.mjs"
   },
   "dependencies": {

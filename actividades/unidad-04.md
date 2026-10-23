@@ -1,9 +1,9 @@
-# Unidad 04 · El contrato que desapareció
+# Unidad 04 · Observar dónde vive el contador
 
-Ana y Bruno continúan con el contador de la unidad 03. Ana despliega desde la cuenta local 0 y Bruno incrementa dos veces desde la cuenta 1. El equipo reinicia su nodo y conserva en el frontend una dirección de la sesión anterior. La consulta deja de funcionar. Debe diagnosticar el problema sin reinstalar las herramientas.
+Esta actividad se realiza con código completo. No se pide implementar funciones. Seguí la [guía del laboratorio 04](../laboratorios/unidad-04/README.md), incluida la preparación de la copia guiada.
 
-1. Reconstruir el orden de instalación, compilación, inicio de nodo y despliegue. Indicar dónde se ve el resultado de cada paso y cuál crea una instancia.
-2. Verificar la red y la existencia de código en la dirección **antes de redesplegar**. Comparar el RPC de la interfaz en 8545 con el nodo temporal de tests en 18545. Explicar por qué una prueba exitosa no recupera el contrato anterior.
-3. Diseñar dos pruebas positivas y una negativa para Contador. Redesplegar, consultar y comparar dirección, recibo y valor. Explicar qué significa que la dirección se repita, pero el contador vuelva a cero.
+1. Registrá qué producen la instalación, compilación, inicio de nodo y despliegue. Identificá ABI, bytecode, red, dirección y hash en tu ejecución. Explicá cuál de esas tareas crea la instancia.
+2. Ejecutá los dos incrementos de Bruno y su intento de reinicio. Compará esperado y observado. Justificá por qué NoAutorizado con valor 2 conservado comprueba el permiso y una falla de conexión no lo comprueba.
+3. Compará contador en 2, nodo detenido, nodo nuevo sin contrato y contador nuevo en 0. Registrá ese orden antes de redesplegar. Explicá por qué conservar el archivo del registro no conserva el estado y por qué una dirección repetida no recupera el valor anterior.
 
-Registrar precondición, actor, acción, resultado esperado y observado. La secuencia detallada y los criterios están en el [laboratorio 04](../laboratorios/unidad-04/README.md).
+Entregá observaciones, evidencias y explicación. No alcanza con copiar resultados esperados ni con una captura de tests aprobados. No se evalúa escribir el contrato en esta práctica.

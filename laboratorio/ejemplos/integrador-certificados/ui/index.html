@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="es-AR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Certificados · Laboratorio de Blockchain</title><link rel="stylesheet" href="/estilos.css"></head>
+<body>
+<header><p class="eyebrow">UTN FRBA · Blockchain &amp; Smart Contracts</p><h1>Comprobar un certificado</h1><p>Un archivo fuera de la cadena. Un registro de emisión y vigencia en el contrato.</p></header>
+<main>
+<section aria-labelledby="conexion-titulo"><h2 id="conexion-titulo">1. Reconocer la instancia</h2><p>Esta práctica usa cuentas locales con saldo ficticio. Ana puede emitir y revocar. Bruno puede consultar.</p>
+<label for="cuenta">Cuenta de práctica</label><select id="cuenta"><option value="0">Ana · autoridad</option><option value="1">Bruno · otra cuenta</option></select><button id="conectar">Conectar</button>
+<p id="conexion" role="status">Sin conexión.</p><dl id="contexto" hidden><dt>Red y acceso</dt><dd>31337 · nodo local en 19645</dd><dt>Contrato</dt><dd id="direccion"></dd><dt>Cuenta activa</dt><dd id="actor"></dd></dl></section>
+<section aria-labelledby="archivo-titulo"><h2 id="archivo-titulo">2. Elegir los bytes que se comprueban</h2><p>Descargá el <a href="/documentos/certificado-aula.txt" download>documento ficticio original</a> y su <a href="/documentos/certificado-alterado.txt" download>versión alterada</a>. Seleccioná uno desde tu computadora. El hash SHA-256 se calcula en el navegador. El archivo seleccionado no se sube al servidor.</p>
+<label for="archivo">Archivo local</label><input id="archivo" type="file"><p id="archivo-elegido">Ningún archivo seleccionado.</p>
+<label for="huella">Huella SHA-256 del archivo, con prefijo 0x</label><input id="huella" spellcheck="false" autocomplete="off" placeholder="0x y 64 dígitos hexadecimales"><p>También podés pegar una huella guardada para consultar su registro cuando no tengas el documento.</p></section>
+<section aria-labelledby="operar-titulo"><h2 id="operar-titulo">3. Consultar, emitir y revocar</h2><p>Una consulta obtiene el estado del registro. Emitir y revocar envían transacciones. El contrato comprueba el permiso aunque el botón esté disponible.</p><div class="acciones"><button id="consultar" data-chain disabled>Consultar registro</button><button id="emitir" data-chain disabled>Emitir certificado</button><button id="revocar" data-chain disabled>Revocar certificado</button></div>
+<p id="operacion" role="status">Conectá la instancia y elegí una huella.</p><div id="resultado" role="status" class="resultado">Estado del registro todavía no consultado.</div><p id="recibo"></p></section>
+<section aria-labelledby="disponibilidad-titulo"><h2 id="disponibilidad-titulo">4. Separar vigencia y disponibilidad</h2><p>Los controles siguientes interrumpen y restauran la entrega del documento de ejemplo en este servidor. No cambian la blockchain ni eliminan tu copia descargada.</p><div class="acciones"><button id="ocultar">Interrumpir acceso al documento</button><button id="restaurar">Restaurar acceso</button><button id="disponibilidad">Comprobar disponibilidad</button></div><p id="estado-archivo" role="status">Disponibilidad todavía no comprobada.</p></section>
+<aside><h2>Qué permite concluir la consulta</h2><p>Vigente significa que esta huella fue emitida y no revocada en esta instancia. No acredita por sí sola estudios, identidad personal ni reconocimiento de la institución. Un archivo diferente puede aparecer como no registrado. La autoridad del ejemplo no tiene rotación de responsables ni firmas múltiples.</p></aside>
+</main><footer>Práctica local · Usá únicamente los documentos ficticios del curso.</footer><script type="module" src="/app.js"></script>
+</body></html>

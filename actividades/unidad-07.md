@@ -6,6 +6,7 @@ Una configuración dice Sepolia, pero el RPC devuelve chainId 1. Un compañero p
 2. Definir qué datos incluye el registro público de la práctica.
 3. Comprobar el resultado y explicar el alcance de verificar código.
 
+
 ## Aplicación al contador compartido
 
 En la demostración conjunta de las unidades 06 y 07, completá una tabla con creación, incrementos y reinicios. Usá los datos observados de gas, precio y comisión, red, hash y bloque. Distinguí rechazo previo, ejecución revertida incluida y ejecución exitosa. Relacioná las confirmaciones con el bloque y la finalización con el dato observado de finalized. Explicá por qué reiniciar a cero conserva los eventos anteriores.

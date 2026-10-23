@@ -54,3 +54,8 @@ Importá el CSV conservando sus columnas y entradas. Usá fórmulas para comisi�
 La contribución es abono menos gas por usuario que asume la organización. Si es positiva, el equilibrio redondea hacia arriba costos fijos / contribución. Si es cero o negativa y hay costos fijos, no se alcanza aumentando usuarios bajo esas mismas entradas.
 
 Los tests Costos revisan las funciones del proyecto con casos de ambos pagadores, frecuencia, ausencia de usuarios y entradas inválidas. No abren ni corrigen la planilla entregada. La revisión docente verifica fórmulas, supuestos, fuentes, sensibilidad, equilibrio y conclusiones.
+
+
+## Conectar la planilla con el integrador
+
+Para la entrega integradora, reutilizá las fórmulas y el análisis de esta unidad. Separá cantidades y gas de emisión y revocación obtenidos en recorrido-certificados.json. Identificá precio por gas y conversión como supuestos si no fueron consultados. Agregá los servicios de consulta y archivos como infraestructura. La misma evidencia puede utilizarse en ambas entregas sin repetir capturas.

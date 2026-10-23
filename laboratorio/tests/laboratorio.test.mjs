@@ -1,7 +1,36 @@
 import {test,after} from 'node:test';import assert from 'node:assert/strict';
 import {parseEther,parseUnits} from 'ethers';import {local,desplegar,costoETH,presupuestoUso} from '../scripts/comun.mjs';import {enviarYConfirmar} from '../ui/cliente.js';
 const p=await local(),a=await p.getSigner(0),b=await p.getSigner(1);after(()=>p.destroy());
-test('Contador: estado, evento y permiso de reiniciar',async()=>{const c=await desplegar('Contador',a);assert.equal(await c.valor(),0n);const r=await(await c.connect(b).incrementar()).wait();assert.equal(c.interface.parseLog(r.logs[0]).args.nuevoValor,1n);await(await c.connect(b).incrementar()).wait();assert.equal(await c.valor(),2n);await assert.rejects(()=>c.connect(b).reiniciar());assert.equal(await c.valor(),2n);await(await c.reiniciar()).wait();assert.equal(await c.valor(),0n);});
+test('Contador: estado, eventos y permiso específico de reiniciar', async () => {
+  const c = await desplegar('Contador', a)
+  const ana = await a.getAddress(), bruno = await b.getAddress()
+  assert.equal(await c.propietario(), ana)
+  assert.equal(await c.valor(), 0n)
+  const evento = (recibo, autor, nuevoValor) => {
+    assert.equal(recibo.status, 1)
+    const eventos = recibo.logs.map(log => c.interface.parseLog(log))
+      .filter(log => log?.name === 'ValorCambiado')
+    assert.equal(eventos.length, 1)
+    assert.equal(eventos[0].args.autor, autor)
+    assert.equal(eventos[0].args.nuevoValor, nuevoValor)
+  }
+  for (const valor of [1n, 2n]) {
+    evento(await (await c.connect(b).incrementar()).wait(), bruno, valor)
+    assert.equal(await c.valor(), valor)
+  }
+  await assert.rejects(() => c.connect(b).reiniciar(), error => {
+    const datos = error.data || error.info?.error?.data?.data || error.info?.error?.data
+    let nombre = error.revert?.name
+    if (!nombre && typeof datos === 'string') {
+      try { nombre = c.interface.parseError(datos)?.name } catch {}
+    }
+    assert.equal(nombre, 'NoAutorizado', 'El rechazo debe comprobar el permiso, no otro error')
+    return true
+  })
+  assert.equal(await c.valor(), 2n)
+  evento(await (await c.reiniciar()).wait(), ana, 0n)
+  assert.equal(await c.valor(), 0n)
+})
 test('ERC20: emisión, transferencia y aprobación acotada',async()=>{
   const ana=await a.getAddress(),bruno=await b.getAddress();
   const c=await desplegar('TokenAula',a,[ana]),supply=parseUnits('1000000',18);
