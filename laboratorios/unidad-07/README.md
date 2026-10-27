@@ -2,6 +2,8 @@
 
 El recorrido obligatorio se completa en la red local. No requiere saldo real, faucet ni una cuenta de proveedor RPC. La extensión en Sepolia permite comparar el mismo procedimiento con una red compartida.
 
+En el recorrido local, cada computadora ejecuta su propio nodo Hardhat y conserva un estado independiente. Dos estudiantes con chainId 31337 no están conectados automáticamente entre sí. En Sepolia usamos una red pública de prueba que ya funciona en Internet, operada por participantes externos al curso. Nuestra computadora envía o consulta como cliente. No se convierte en validador por usar esa red.
+
 ## Preparación
 
 Contador implementado y pruebas locales aprobadas. No se necesita una cuenta de proveedor RPC.
@@ -46,6 +48,14 @@ Si se dispone de un RPC y saldo de prueba gratuitos, realizar --check y luego --
 - [Actividad de aplicación](../../actividades/unidad-07.md)
 - [Preparación del laboratorio](../../laboratorio/README.md)
 
+## Qué se configura en cada modalidad
+
+La interfaz guiada usa la cuenta seleccionada en la wallet y exige Sepolia 11155111 tanto en la página como en la wallet. No solicita `.env`, firma escrita a mano ni clave privada. Para una creación nueva, dirección del contrato y hash se obtienen del envío y el recibo. Para abrir un contrato existente se usan los datos completos compartidos por su creador.
+
+La variante por terminal usa `scripts/desplegar-sepolia.mjs`. En `.env`, `SEPOLIA_RPC_URL` contiene la URL real del acceso RPC a Sepolia. No es la URL del explorador ni la dirección de un contrato. `SEPOLIA_PRIVATE_KEY` contiene la clave privada de una cuenta exclusiva de prueba. No es su dirección, una firma ni la frase de recuperación. Esa clave no forma parte de ninguna entrega.
+
+El modo `--check` consulta red, cuenta, saldo y estimación sin enviar. El modo `--desplegar` firma y envía con la cuenta configurada, sin abrir la confirmación de una extensión de wallet. El constructor de Contador no recibe argumentos. En ambos modos de envío se requiere saldo de prueba suficiente para la comisión, cuyo importe cambia según las condiciones de la red.
+
 ## Resultados de la extensión opcional
 
 `npm run sepolia -- --check` consulta y estima sin enviar. El modo `--desplegar` espera una creación y guarda `laboratorio/resultados/deployment-sepolia.json` con datos públicos: red, dirección, hash, bloque, resultado, cuenta creadora, propietario, valor, gas y comisión. La URL y la clave no se copian. No cambia el registro local de la DApp.
@@ -54,6 +64,10 @@ Los tests `Deployment` revisan el verificador local y sus rechazos. No ejecutan 
 
 
 ## Práctica conjunta de las unidades 06 y 07
+
+“Conjunta” significa que combina ambas unidades y permite observar u operar sobre un mismo contrato de Sepolia desde distintas computadoras. Puede firmar solo el docente y el resto observar. Si también firma otra cuenta, debe usar la misma red y dirección del contrato. Las computadoras de la clase no forman el conjunto de validadores de Sepolia. Los nodos externos verifican por software y los validadores asignados participan del consenso.
+
+Una transacción incluida tiene una comisión según el gas cobrado y el precio efectivo. No se multiplica por la cantidad de nodos que comprueban su resultado. Crear e incrementar pagan con ETH de prueba en Sepolia. Consultar mediante eth_call no publica una transacción ni descuenta una comisión de transacción a la cuenta. Los consumos reales se obtienen de los recibos, no del número de computadoras conectadas.
 
 La [guía completa de gas, transacciones e historia](../../laboratorio/ejemplos/testnet-observable/GUIA-06-07.md) continúa el contador de 04/05. Desde laboratorio, ejecutá npm run preparar:testnet y seguí EMPEZAR-AQUI.md de la copia. El código está completo y los ejercicios originales se conservan.
 

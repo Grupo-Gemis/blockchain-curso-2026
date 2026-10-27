@@ -4,6 +4,26 @@ Esta práctica trae el contrato y la interfaz completos. Continúa las unidades 
 
 Primero ensayamos en una red local independiente. Después usamos Sepolia para observar una transacción pública, su costo y su historia. La parte pública se realiza con el docente y depende de disponer de saldo de prueba y conexión. La aprobación individual conserva su recorrido local.
 
+Sepolia es una red de prueba compartida por Internet que funciona con nodos y validadores externos a la clase. En el ensayo local, cada computadora que inicia Hardhat tiene su propia red y su propio estado. En modo Sepolia, la página puede seguir abierta desde localhost, pero la wallet se comunica con la red pública. El nodo Hardhat local no valida las operaciones de Sepolia.
+
+La actividad puede compartirse desde varias computadoras que observan o usan la misma dirección de contrato en Sepolia. También puede firmar solo el docente mientras el grupo observa. Eso no convierte a los estudiantes en validadores. La comisión de una transacción incluida se calcula una vez con su gas y precio efectivo, sin multiplicarla por los nodos que verifican.
+
+
+## Datos concretos de la demostración con wallet
+
+La interfaz con wallet y el script por terminal son alternativas. La interfaz no lee `.env` ni pide claves privadas. En la página y en la wallet se elige Sepolia, con chainId 11155111. La cuenta se selecciona en la wallet. El selector Ana/Bruno de la página pertenece al ensayo local.
+
+| Dato | Qué se usa |
+|---|---|
+| Cuenta que crea | Una cuenta dedicada con ETH de Sepolia para la comisión. La wallet muestra su dirección pública. |
+| Crear Contador | No requiere argumentos de constructor. La interfaz prepara el código y no envía ETH como value. |
+| Dirección del contrato y hash de creación | Se obtienen durante el envío y seguimiento de la creación. Para abrir una instancia ajena, se pegan completos los datos compartidos por su creador. |
+| Hash a observar | El de la operación que se quiere seguir. La interfaz lo carga al enviar. |
+| RPC de contraste | Opcional. Puede quedar vacío. Si se utiliza, debe ser otro acceso HTTPS a Sepolia sin credenciales. |
+| Gas y precio | La interfaz estima gas y solicita un margen del 20%. La wallet propone el precio para revisar antes de firmar. El recibo dará el consumo y precio efectivos. |
+
+Cada cuenta firma sus propias operaciones. Una firma es una autorización para una transacción concreta, no un valor fijo que se copie en estos campos. Quien observa por el explorador no necesita firma ni saldo. El gas no se multiplica por la cantidad de nodos que verifican.
+
 ## Preparar la copia
 
 Si estás leyendo este archivo dentro de `ejemplos/testnet-observable`, volvé a la carpeta `laboratorio` del repositorio y ejecutá:
