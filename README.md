@@ -66,6 +66,6 @@ El [caso de certificados](https://grupo-gemis.github.io/blockchain-curso-2026/in
 ## Prácticas completas de las unidades 06 y 07
 
 - [Contador resuelto y tutorial completo de Sepolia](laboratorio/ejemplos/testnet-observable/README.md). Incluye PDF, Word editable, apuntes, preparación automática y ensayo local.
-- [Red de aula para diez estudiantes](laboratorio/ejemplos/red-aula/README.md). Cada identidad firma, propone por turnos, comprueba bloques y participa de un quórum de siete votos. El docente coordina y todos conservan una réplica verificable.
+- [Red de aula configurable](laboratorio/ejemplos/red-aula/README.md). Admite de 2 a 60 participantes. Incluye una modalidad de navegador con coordinador y otra de [nodos independientes entre pares](laboratorio/ejemplos/red-aula/NODOS-INDEPENDIENTES.md), con Node.js en cada computadora. La cantidad, los turnos y el quórum se adaptan al curso.
 
 El Contador permite actuar como usuario de una red. La red de aula permite experimentar sus responsabilidades de participación con un consenso didáctico explícito.

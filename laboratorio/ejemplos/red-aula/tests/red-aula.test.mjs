@@ -105,7 +105,7 @@ test('Aula completa: diez identidades, difusión, siete votos, finalidad, propue
   }
   try {
     let state=await request('state')
-    await assert.rejects(request('teacher',{action:'start'},null,true),/diez identidades/)
+    await assert.rejects(request('teacher',{action:'start'},null,true),/10 identidades/)
     await assert.rejects(request('join',{pin:'000000',slot:1}),/Código/)
     for(const p of participants) {
       const payload={sessionId:state.sessionId,slot:p.slot,name:p.name}

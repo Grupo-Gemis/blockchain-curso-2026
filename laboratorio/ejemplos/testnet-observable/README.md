@@ -72,8 +72,10 @@ El tutorial documenta el recorrido público del 27/10/2026 y conserva sus hashes
 
 ## Participar en el consenso del aula
 
-La [red de aula para diez estudiantes](../red-aula/README.md) agrega una práctica distinta: cada participante firma operaciones, propone cuando le toca, comprueba y vota desde su copia de la cadena. El Contador continúa funcionando como ejemplo de aplicación sobre una red local o Sepolia.
+La [red de aula configurable](../red-aula/README.md) agrega una práctica distinta: cada participante firma operaciones, propone cuando le toca, comprueba y vota desde su copia de la cadena. El Contador continúa funcionando como ejemplo de aplicación sobre una red local o Sepolia.
 
 ## Procedencia
 
 Práctica resuelta del repositorio del curso. Puede ejecutarse directamente aquí o preparar una copia independiente con `npm run preparar:testnet` desde la carpeta `laboratorio`. La preparación conserva las copias previas y sus resultados. Los scripts de estudiantes con ejercicios pendientes se mantienen separados.
+
+La [modalidad de nodos independientes](../red-aula/NODOS-INDEPENDIENTES.md) requiere Node.js 24 en cada computadora y se comunica entre pares. Ambas modalidades admiten de 2 a 60 participantes con turnos y quórum adaptados al curso.

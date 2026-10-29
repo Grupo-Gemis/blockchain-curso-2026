@@ -1,4 +1,4 @@
-import {eth, NODOS, QUORUM, GAS_TX, copy, hash, sign, blockBody, buildBlock, checkBlock,
+import {eth, GAS_TX, copy, hash, sign, blockBody, buildBlock, checkBlock,
   replay, effectiveTip, nextBaseFee, selectByTip} from './modelo.mjs'
 
 const $ = id => document.getElementById(id)
@@ -28,9 +28,15 @@ async function act(action) {
   catch(error) {message(error.message)}
   finally {busy = false}
 }
-const options = Array.from({length:NODOS},(_,i) => `<option value="${i+1}">Nodo ${i+1}</option>`).join('')
-$('slot').innerHTML = options
-$('to').innerHTML = options
+let shownCount
+function rosterOptions() {
+  if (shownCount === state.count) return
+  shownCount = state.count
+  const options = Array.from({length:state.count},(_,i) => `<option value="${i+1}">Nodo ${i+1}</option>`).join('')
+  $('slot').innerHTML = options
+  $('to').innerHTML = options
+  $('count').value = state.count
+}
 $('teacher-panel').hidden = !teacherKey
 $('nonce').addEventListener('input', () => {$('nonce').dataset.dirty = 'true'})
 $('join-form').addEventListener('submit', event => {event.preventDefault(); act(async () => {
@@ -40,8 +46,9 @@ $('join-form').addEventListener('submit', event => {event.preventDefault(); act(
   const joined = await api('join', {...payload,pin:$('pin').value,address:wallet.address,signature:await sign(wallet,payload)})
   identity = {...joined,privateKey:wallet.privateKey,name:payload.name}
   saveIdentity()
-  $('to').value = String(identity.slot % NODOS + 1)
+  $('to').value = String(identity.slot % state.count + 1)
 })})
+$('configure').onclick = () => act(() => api('teacher',{action:'configure',count:Number($('count').value)}))
 $('start').onclick = () => act(() => api('teacher',{action:'start'}))
 $('next').onclick = () => act(() => api('teacher',{action:'next'}))
 $('offline').onclick = () => {offline = !offline; $('offline').textContent = offline ? 'Reconectar y verificar la cadena' : 'Desconectar mi nodo'; render(); if (!offline) refresh()}
@@ -59,9 +66,9 @@ function context() {
   if (!localChain.length || replicaError) throw Error('Primero se necesita una copia local verificada de la cadena.')
   if (state.phase === 'certified' && localChain.at(-1).hash === state.proposal?.hash) {
     const prefix = localChain.slice(0,-1)
-    return {parent:prefix.at(-1),accounts:replay(prefix,state.participants,state.seed),slot:state.slot,seed:state.seed,participants:state.participants}
+    return {parent:prefix.at(-1),accounts:replay(prefix,state.participants,state.seed,state.config),slot:state.slot,seed:state.seed,participants:state.participants,config:state.config}
   }
-  return {parent:localChain.at(-1),accounts:localAccounts,slot:state.slot,seed:state.seed,participants:state.participants}
+  return {parent:localChain.at(-1),accounts:localAccounts,slot:state.slot,seed:state.seed,participants:state.participants,config:state.config}
 }
 $('pending').addEventListener('change', event => {
   const id = event.target.dataset.transaction
@@ -113,7 +120,7 @@ async function refresh() {
     state = next
     if (state.chain.length && hash(localChain) !== hash(state.chain)) {
       try {
-        const accounts = replay(state.chain,state.participants,state.seed)
+        const accounts = replay(state.chain,state.participants,state.seed,state.config)
         localChain = copy(state.chain)
         localAccounts = accounts
         replicaError = ''
@@ -127,6 +134,14 @@ async function refresh() {
 }
 function render() {
   if (!state) return
+  rosterOptions()
+  $('network-label').textContent = 'RED COORDINADA · ' + state.count + ' PARTICIPANTES'
+  $('network-description').textContent = 'Cada participante firma, comprueba las propuestas y conserva una copia verificable. Se necesitan ' + state.quorum + ' aprobaciones distintas de ' + state.count + '.'
+  $('teacher-help').textContent = 'Elegí la cantidad antes del primer ingreso. Para comenzar deben estar las ' + state.count + ' identidades. Cada ciclo de ' + state.count + ' turnos asigna una propuesta a cada estudiante.'
+  $('count').disabled = state.participants.length > 0 || state.phase !== 'waiting'
+  $('configure').disabled = $('count').disabled
+  $('start').textContent = 'Iniciar red con ' + state.count + ' nodos'
+  $('finality-help').textContent = 'En este modelo, ' + state.quorum + ' firmas certifican un bloque. Su sucesor certificado marca al anterior como finalizado. Ethereum usa reglas adicionales con checkpoints de épocas.'
   const active = Boolean(identity && !offline && !replicaError)
   const proposing = active && state.phase === 'open' && state.proposer === identity.slot
   const voting = active && ['voting','certified'].includes(state.phase) && !state.votes.some(v => v.voter === identity.slot)
@@ -140,10 +155,10 @@ function render() {
   const base = state.chain.length ? nextBaseFee(state.chain.at(-1)) : '20000000000'
   $('base').textContent = gwei(base) + ' gwei/gas'
   $('capacity').textContent = state.pending.length + ' pendientes / 3 transferencias'
-  $('joined').textContent = state.participants.length + ' de 10'
-  $('start').disabled = state.phase !== 'waiting' || state.participants.length !== NODOS
+  $('joined').textContent = state.participants.length + ' de ' + state.count
+  $('start').disabled = state.phase !== 'waiting' || state.participants.length !== state.count
   $('next').disabled = state.phase === 'waiting'
-  $('peers').innerHTML = Array.from({length:NODOS},(_,i) => {
+  $('peers').innerHTML = Array.from({length:state.count},(_,i) => {
     const id=i+1,p=state.participants.find(p => p.slot === id),vote=state.votes.find(v => v.voter === id)
     return `<div class="peer ${state.proposer === id ? 'proposer' : ''} ${vote ? vote.approve ? 'approved' : 'rejected' : ''}"><span class="number">NODO ${id}</span><strong>${escape(p?.name || 'Sin ingresar')}</strong><span class="small">${state.proposer === id ? 'Proponente y validador' : 'Validador'} · ${p ? p.online ? 'conectado' : 'sin señal reciente' : 'pendiente'}</span><span class="small">${vote ? vote.approve ? 'Aprobó con firma' : 'Rechazó con firma' : 'Sin voto en este turno'}</span></div>`
   }).join('')
@@ -174,13 +189,13 @@ function render() {
   $('proposal').innerHTML = proposal ? `<p><strong>Bloque ${proposal.height}</strong> · Nodo ${proposal.proposer}<br>${proposal.transactions.length} transferencias · ${proposal.gasUsed.toLocaleString('es-AR')} gas<br>Quema declarada: ${ether(proposal.burned)} ETH<br>Propinas declaradas: ${ether(proposal.tips)} ETH</p><p class="small">Huella: ${short(proposal.hash)}</p>` : '<p>Todavía no hay una propuesta para este turno.</p>'
   $('check-result').textContent = checked?.message || 'Esperando tu comprobación independiente.'
   $('check-result').className = 'check-result' + (checked ? checked.ok ? ' good' : ' bad' : '')
-  $('votes').textContent = `${state.votes.filter(v => v.approve).length} de ${QUORUM} aprobaciones necesarias. ${state.votes.filter(v => !v.approve).length} rechazos.`
+  $('votes').textContent = `${state.votes.filter(v => v.approve).length} de ${state.quorum} aprobaciones necesarias. ${state.votes.filter(v => !v.approve).length} rechazos.`
   $('finalized').textContent = state.finalizedHeight ? 'Finalizado hasta bloque ' + state.finalizedHeight : 'Solo génesis finalizado'
-  $('chain').innerHTML = [...localChain].reverse().map(block => `<article class="block ${block.height <= state.finalizedHeight ? 'final' : ''}"><strong>${block.height ? 'Bloque ' + block.height : 'Génesis'}</strong><p>${block.height ? 'Turno ' + block.slot + ' · propuso N' + block.proposer : 'Diez identidades · 1 ETH ficticio cada una'}</p><code>${escape(short(block.hash))}</code><p>${block.height ? block.transactions.length + ' transferencias · ' + block.certificate.length + ' firmas' : 'Estado inicial compartido'}</p><p>${block.height <= state.finalizedHeight ? 'Finalizado en este modelo' : 'Certificado. Espera un sucesor certificado.'}</p></article>`).join('')
+  $('chain').innerHTML = [...localChain].reverse().map(block => `<article class="block ${block.height <= state.finalizedHeight ? 'final' : ''}"><strong>${block.height ? 'Bloque ' + block.height : 'Génesis'}</strong><p>${block.height ? 'Turno ' + block.slot + ' · propuso N' + block.proposer : state.count + ' identidades · 1 ETH ficticio cada una'}</p><code>${escape(short(block.hash))}</code><p>${block.height ? block.transactions.length + ' transferencias · ' + block.certificate.length + ' firmas' : 'Estado inicial compartido'}</p><p>${block.height <= state.finalizedHeight ? 'Finalizado en este modelo' : 'Certificado. Espera un sucesor certificado.'}</p></article>`).join('')
   if (localAccounts) {
     const supply = Object.values(localAccounts).reduce((sum,a) => sum + BigInt(a.balance),0n)
     const burned = localChain.slice(1).reduce((sum,b) => sum + BigInt(b.burned),0n)
-    $('supply').textContent = `Oferta inicial: 10 ETH ficticios. Saldos actuales: ${ether(supply)}. Quema acumulada: ${ether(burned)}. Las propinas cambian de cuenta. Esta simulación no emite recompensas de consenso.`
+    $('supply').textContent = `Oferta inicial: ${state.count} ETH ficticios. Saldos actuales: ${ether(supply)}. Quema acumulada: ${ether(burned)}. Las propinas cambian de cuenta. Esta simulación no emite recompensas de consenso.`
   }
   $('events').innerHTML = [...state.events].reverse().slice(0,40).map(event => `<li><span>Turno ${event.slot}</span>${escape(event.detail)}</li>`).join('')
 }

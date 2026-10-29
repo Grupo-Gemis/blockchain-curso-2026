@@ -4,7 +4,7 @@ import {readFile, mkdir, writeFile} from 'node:fs/promises'
 import {networkInterfaces} from 'node:os'
 import {fileURLToPath} from 'node:url'
 import path from 'node:path'
-import {NODOS, QUORUM, GAS_BLOQUE, CHAIN_ID, copy, hash, genesis, initialAccounts, proposerFor,
+import {configuration, GAS_BLOQUE, copy, hash, genesis, initialAccounts, proposerFor,
   checkTransaction, effectiveTip, checkBlock, checkVote, nextBaseFee, signedBy, eth} from './modelo.mjs'
 
 const root = fileURLToPath(new URL('.', import.meta.url))
@@ -15,9 +15,10 @@ export function createClassroom(options = {}) {
   const sessionId = randomBytes(8).toString('hex')
   const participants = [], tokens = new Map(), seen = new Map()
   let proposalContext
-  const state = {version:1, model:'Simulación didáctica de diez validadores. Coordinador central de mensajes. No es Ethereum ni Sepolia.',
-    sessionId, seed, chainId:CHAIN_ID, quorum:QUORUM, gasLimit:GAS_BLOQUE,
-    participants, phase:'waiting', slot:0, proposer:null, chain:[], accounts:initialAccounts(),
+  let config = configuration(options.count)
+  const state = {version:1, mode:'coordinada', model:'Simulación didáctica con coordinador central de mensajes. Su caída interrumpe el intercambio. No es Ethereum ni Sepolia.',
+    sessionId, seed, config, count:config.count, chainId:config.chainId, quorum:config.quorum, gasLimit:GAS_BLOQUE,
+    participants, phase:'waiting', slot:0, proposer:null, chain:[], accounts:initialAccounts(config.count),
     pending:[], proposal:null, votes:[], finalizedHeight:0, events:[], rounds:[]}
   const event = (kind, detail) => {
     state.events.push({at:new Date().toISOString(), slot:state.slot, kind, detail})
@@ -69,7 +70,7 @@ export function createClassroom(options = {}) {
         if (url.pathname === '/api/join') {
           if (input.pin !== pin) throw Error('Código de aula incorrecto.')
           if (state.phase !== 'waiting') throw Error('La red ya comenzó. Conservá la pestaña que tiene tu identidad.')
-          if (!Number.isInteger(input.slot) || input.slot < 1 || input.slot > NODOS) throw Error('Elegí una identidad de 1 a 10.')
+          if (!Number.isInteger(input.slot) || input.slot < 1 || input.slot > config.count) throw Error('Elegí una identidad de 1 a ' + config.count + '.')
           if (participants.some(p => p.slot === input.slot)) throw Error('Esa identidad ya está ocupada.')
           if (typeof input.name !== 'string' || !input.name.trim() || input.name.length > 40) throw Error('Escribí un nombre de hasta cuarenta caracteres.')
           if (!eth.isAddress(input.address) || participants.some(p => p.address.toLowerCase() === input.address.toLowerCase())) throw Error('Dirección inválida o repetida.')
@@ -86,15 +87,23 @@ export function createClassroom(options = {}) {
         }
         if (url.pathname === '/api/teacher') {
           teacher(request)
+          if (input.action === 'configure') {
+            if (state.phase !== 'waiting' || participants.length) throw Error('La cantidad se fija antes del primer ingreso. Para otro curso iniciá una sesión nueva.')
+            config = configuration(input.count)
+            Object.assign(state, {config, count:config.count, chainId:config.chainId, quorum:config.quorum, accounts:initialAccounts(config.count)})
+            event('configuracion', config.count + ' participantes. Quórum: ' + config.quorum + '.')
+            save()
+            return json(response, snapshot())
+          }
           if (input.action === 'start') {
-            if (state.phase !== 'waiting' || participants.length !== NODOS) throw Error('Para comenzar deben ingresar las diez identidades.')
-            state.chain = [genesis(seed, participants)]
+            if (state.phase !== 'waiting' || participants.length !== config.count) throw Error('Para comenzar deben ingresar las ' + config.count + ' identidades.')
+            state.chain = [genesis(seed, participants, config)]
           } else if (input.action === 'next') {
             if (state.phase === 'waiting') throw Error('Primero iniciá la red.')
             state.rounds.push({slot:state.slot, proposal:copy(state.proposal), votes:copy(state.votes), committed:state.phase === 'certified'})
           } else throw Error('Acción docente desconocida.')
           state.slot++
-          state.proposer = proposerFor(seed, state.slot)
+          state.proposer = proposerFor(seed, state.slot, config.count)
           state.phase = 'open'
           state.proposal = null
           proposalContext = null
@@ -104,7 +113,7 @@ export function createClassroom(options = {}) {
           const slot = authenticate(request), tx = input.transaction
           if (state.phase === 'waiting') throw Error('Esperá el inicio de la red.')
           if (state.phase === 'voting') throw Error('La propuesta está en votación. Esperá el próximo turno para enviar o reemplazar.')
-          checkTransaction(tx, participants)
+          checkTransaction(tx, participants, config)
           if (tx.body.from !== slot) throw Error('Solo podés enviar con tu propia identidad.')
           const account = state.accounts[slot]
           if (tx.body.nonce < account.nonce || tx.body.nonce > account.nonce + 20) throw Error('Nonce fuera de la ventana de esta práctica.')
@@ -125,7 +134,7 @@ export function createClassroom(options = {}) {
           if (JSON.stringify(block).length > 80000 || !Array.isArray(block.transactions) || block.transactions.length > 4) throw Error('Propuesta fuera del tamaño de la práctica.')
           for (const tx of block.transactions) if (!state.pending.some(p => p.id === tx.id && JSON.stringify(p) === JSON.stringify(tx))) throw Error('La propuesta incluye una transacción ajena a la cola del aula.')
           state.proposal = copy(block)
-          proposalContext = {parent:copy(state.chain.at(-1)), accounts:copy(state.accounts), slot:state.slot, seed, participants}
+          proposalContext = {parent:copy(state.chain.at(-1)), accounts:copy(state.accounts), slot:state.slot, seed, participants, config}
           state.phase = 'voting'
           event('propuesta', 'Nodo ' + slot + ': propuesta difundida. Cada nodo debe comprobarla.')
         } else if (url.pathname === '/api/vote') {
@@ -137,14 +146,14 @@ export function createClassroom(options = {}) {
           state.votes.push(copy(vote))
           event('voto', 'Nodo ' + slot + (vote.approve ? ': aprobación firmada.' : ': rechazo firmado.'))
           const approvals = state.votes.filter(v => v.approve)
-          if (approvals.length >= QUORUM && state.phase === 'voting') {
+          if (approvals.length >= config.quorum && state.phase === 'voting') {
             const result = checkBlock(state.proposal, proposalContext)
             state.chain.push({...copy(state.proposal), certificate:copy(approvals)})
             state.accounts = result.accounts
             state.finalizedHeight = Math.max(0, state.chain.at(-1).height - 1)
             state.pending = state.pending.filter(tx => tx.body.nonce >= state.accounts[tx.body.from].nonce)
             state.phase = 'certified'
-            event('certificado', 'Siete firmas distintas certifican el bloque ' + state.chain.at(-1).height + '.')
+            event('certificado', config.quorum + ' firmas distintas certifican el bloque ' + state.chain.at(-1).height + '.')
           } else if (state.phase === 'certified') {
             state.chain.at(-1).certificate = copy(approvals)
           }
@@ -152,7 +161,7 @@ export function createClassroom(options = {}) {
         save()
         return json(response, snapshot())
       }
-      const files = {'/':['index.html','text/html'], '/app.js':['app.js','text/javascript'],
+      const files = {'/':['index.html','text/html'], '/guia-pares':['NODOS-INDEPENDIENTES.md','text/plain'], '/app.js':['app.js','text/javascript'],
         '/modelo.mjs':['modelo.mjs','text/javascript'], '/styles.css':['styles.css','text/css'],
         '/vendor/ethers.umd.cjs':['vendor/ethers.umd.cjs','text/javascript']}
       if (request.method !== 'GET' || !files[url.pathname]) return json(response, {error:'Archivo inexistente.'}, 404)
@@ -173,13 +182,15 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const portIndex = process.argv.indexOf('--puerto'), port = portIndex >= 0 ? Number(process.argv[portIndex + 1]) : 4780
   if (!Number.isInteger(port) || port < 1024 || port > 65535) throw Error('Puerto inválido.')
   const host = process.argv.includes('--aula') ? '0.0.0.0' : '127.0.0.1'
-  const classroom = createClassroom({outputDir:path.join(root,'resultados')})
+  const countIndex = process.argv.indexOf('--estudiantes')
+  const count = countIndex >= 0 ? Number(process.argv[countIndex + 1]) : undefined
+  const classroom = createClassroom({count, outputDir:path.join(root,'resultados')})
   classroom.server.once('error', error => {
     console.error(error.code === 'EADDRINUSE' ? 'El puerto ' + port + ' ya está ocupado. Se conservó el proceso que lo usa.' : error.message)
     process.exitCode = 1
   })
   classroom.server.listen(port, host, () => {
-    console.log('Red de aula para diez estudiantes. Código de ingreso: ' + classroom.pin)
+    console.log('Red coordinada para ' + classroom.snapshot().count + ' estudiantes. Código de ingreso: ' + classroom.pin)
     console.log('Acceso docente local: http://127.0.0.1:' + port + '/#docente=' + classroom.teacherKey)
     if (host === '0.0.0.0') {
       for (const network of Object.values(networkInterfaces()).flat()) if (network.family === 'IPv4' && !network.internal) console.log('Estudiantes en la misma red: http://' + network.address + ':' + port)

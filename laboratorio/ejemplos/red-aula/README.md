@@ -1,12 +1,14 @@
-# Red de aula para diez estudiantes
+# Red de aula para distintos cursos
 
-Cada estudiante participa como un nodo didáctico. Tiene una identidad de firma, conserva una copia de la cadena y comprueba las propuestas. En diez turnos todos pasan una vez por el rol de proponente. El docente coordina los tiempos y observa sin ocupar una de esas diez identidades.
+Hay dos modalidades: **navegadores con coordinador** y **nodos independientes entre pares**. Para vivir la descentralización, usen el [tutorial completo de nodos independientes](NODOS-INDEPENDIENTES.md). Cada computadora ejecuta Node.js y se comunica con sus compañeros.
+
+La modalidad coordinada que sigue permite comenzar con menos preparación. Cada estudiante participa como un nodo didáctico. Tiene una identidad de firma, conserva una copia de la cadena y comprueba las propuestas. La cantidad se configura entre 2 y 60. En N turnos todos pasan una vez por el rol de proponente. El valor inicial es diez. El docente coordina los tiempos y observa sin ocupar una identidad de estudiante.
 
 La actividad conecta las unidades 01, 06 y 07. Permite experimentar difusión, puja, capacidad, nonces, propuesta, comprobación, atestaciones, quórum y finalidad. No requiere wallet, saldo público ni instalar dependencias. El código está completo.
 
 ## Preparar la sesión
 
-Solo la computadora que coordina necesita **Node.js 24 LTS**. Los diez estudiantes necesitan un navegador y acceso a esa computadora por la misma red local. La biblioteca de firmas se sirve desde esta carpeta y no se descarga de Internet.
+**En la modalidad coordinada**, solo la computadora que distribuye los mensajes necesita **Node.js 24 LTS**. Los estudiantes necesitan un navegador y acceso a esa computadora por la misma red local. Su caída interrumpe esta modalidad. **En la modalidad entre pares, cada estudiante necesita Node.js 24 y ejecuta su propio nodo.** La biblioteca de firmas se sirve desde esta carpeta y no se descarga de Internet.
 
 Desde la raíz del repositorio:
 
@@ -18,7 +20,17 @@ npm run aula
 
 La terminal muestra un código de seis cifras, el acceso docente y las direcciones para estudiantes. El docente abre su acceso y comparte con el grupo una dirección de la forma `http://192.168.1.20:4780`, usando la dirección real que informó el programa. **127.0.0.1 siempre indica la propia computadora**. No sirve para que otro estudiante se conecte a la del docente.
 
-Cada estudiante elige el número de nodo asignado, escribe su nombre y el código. El navegador genera una clave exclusiva de esta simulación. Mantener la pestaña abierta permite conservar la identidad durante la sesión. El docente inicia cuando aparecen las diez identidades.
+Para otro tamaño de curso, indiquen la cantidad al arrancar:
+
+```sh
+npm run aula -- --estudiantes 20
+```
+
+También se puede usar **Cantidad de estudiantes → Aplicar cantidad** en el panel docente, antes del primer ingreso. La cantidad queda fija cuando ingresa alguien. Para otra cursada se inicia otra sesión y se conserva la evidencia previa. Los selectores, saldos iniciales, turnos, quórum y exportación se adaptan automáticamente. El límite de tres transferencias por bloque se mantiene para observar la competencia por espacio.
+
+El quórum es `floor(2 × N / 3) + 1`, estrictamente mayor que dos tercios. Con 6 se necesitan 5 firmas, con 10 se necesitan 7 y con 20 se necesitan 14. Las ausencias toleradas para reunir ese quórum son N menos esa cantidad. La admisión hasta 60 no representa una medición de rendimiento con 60 computadoras.
+
+Cada estudiante elige el número de nodo asignado, escribe su nombre y el código. El navegador genera una clave exclusiva de esta simulación. Mantener la pestaña abierta permite conservar la identidad durante la sesión. El docente inicia cuando aparecen todas las identidades configuradas.
 
 Para ensayar en una sola computadora:
 
@@ -36,7 +48,9 @@ El **nonce** es el número de secuencia de la cuenta. El **gas** mide trabajo. L
 
 Cada identidad empieza con 1 ETH ficticio. Cada transferencia simple consume y autoriza 21.000 gas. El bloque tiene un límite didáctico de 63.000 gas y caben hasta tres transferencias. La base inicial es 20 gwei por gas. Un bloque lleno eleva la base siguiente a 22,5. Un bloque vacío la baja 12,5%, con las divisiones enteras de EIP-1559. La condición inicial se configura en el génesis.
 
-## Guion de participación
+## Guion de participación con el ejemplo de diez
+
+El siguiente guion conserva la clase de diez como ejemplo. Para otro N, usen su quórum Q, comparen Q − 1 con Q votos y desconecten N − Q y luego N − Q + 1 participantes. Completen N turnos para que todos propongan. La postergación de una oferta baja se observa después de `floor((N − 1) / 3)` bloques llenos, si N es al menos 4 y hay una operación de mayor propina por cada otra cuenta. Con grupos menores se envían varias operaciones consecutivas por cuenta para llenar la cola.
 
 Se puede realizar en 70 a 90 minutos. Los tiempos son una propuesta de clase y pueden extenderse. El docente no avanza el turno hasta que el grupo haya explicado la observación.
 
@@ -65,7 +79,7 @@ Antes del primer bloque, configurá ofertas de 100/1, 22/5, 30/3, 19/2 y 21/4, d
 npm run puja
 ```
 
-La terminal muestra la misma cuenta sin necesitar diez navegadores. No es una transacción en Ethereum.
+La terminal muestra la misma cuenta sin necesitar varios navegadores. No es una transacción en Ethereum.
 
 ### Un nonce posterior ofrece más y sigue esperando
 
@@ -77,7 +91,7 @@ El proponente puede seleccionar manualmente una transacción válida con menor p
 
 ## Qué comprueba cada navegador
 
-Al recibir la cadena, el navegador parte de los saldos y las identidades del génesis. Verifica la firma de cada transacción, la identidad asignada para proponer, el enlace al padre, el hash, la base calculada, los límites, los nonces y los fondos. Ejecuta las transferencias y compara la huella del estado. Comprueba que el certificado tenga siete firmas distintas sobre el mismo bloque.
+Al recibir la cadena, el navegador parte de los saldos y las identidades del génesis. Verifica la firma de cada transacción, la identidad asignada para proponer, el enlace al padre, el hash, la base calculada, los límites, los nonces y los fondos. Ejecuta las transferencias y compara la huella del estado. Comprueba que el certificado alcance el quórum configurado con firmas distintas sobre el mismo bloque.
 
 La aprobación de una propuesta requiere pulsar primero la comprobación local. El coordinador verifica además las reglas y los votos antes de certificar. Una propuesta inválida se puede difundir para el experimento, pero no certificar. La huella del estado usa SHA-256. Las firmas usan las herramientas de ethers 6.16.0 con secp256k1 y mensajes identificados por hash.
 
@@ -85,11 +99,11 @@ La aprobación de una propuesta requiere pulsar primero la comprobación local. 
 
 | Regla de aula | Relación con una red real |
 |---|---|
-| Un coordinador distribuye los mensajes. | Ethereum usa conexiones entre pares. La caída del coordinador de esta práctica interrumpe el ejercicio. |
-| Diez navegadores representan nodos y todos votan sobre cada propuesta. | Un cliente completo conserva y verifica datos con reglas de ejecución y consenso. Ethereum asigna deberes a comités. |
+| En esta modalidad un coordinador distribuye mensajes y avanza turnos. | Ethereum usa conexiones entre pares. La modalidad de [nodos independientes](NODOS-INDEPENDIENTES.md) elimina esa dependencia y usa su propio consenso didáctico. |
+| N navegadores representan nodos y todos pueden votar sobre cada propuesta. | Un cliente completo conserva y verifica datos con reglas de ejecución y consenso. Ethereum asigna deberes a comités. |
 | Todos tienen igual peso y se turnan sin repeticiones en cada ciclo. | En PoS importan el saldo efectivo y la asignación del protocolo. Puede repetirse un proponente. |
 | El docente avanza los turnos. | Ethereum tiene slots y épocas temporizados por el protocolo. |
-| Siete votos certifican y un sucesor certificado finaliza al anterior. | Ethereum justifica y finaliza checkpoints de épocas mediante reglas adicionales. |
+| El quórum configurado certifica y un sucesor certificado finaliza al anterior. | Ethereum justifica y finaliza checkpoints de épocas mediante reglas adicionales. |
 | Solo hay transferencias de costo fijo en el modelo clásico de gas. | Los contratos y las reglas activas generan costos y límites diferentes. |
 | La tarifa base se quema y no hay emisión. | Ethereum emite recompensas de consenso y aplica penalizaciones con reglas separadas. |
 

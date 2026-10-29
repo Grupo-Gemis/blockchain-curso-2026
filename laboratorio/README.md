@@ -159,4 +159,4 @@ npm run preparar
 npm start
 ```
 
-Para la [red de aula de diez estudiantes](ejemplos/red-aula/README.md), volvé al laboratorio original y ejecutá `npm run red:aula`. No usa el nodo del Contador y no necesita instalar dependencias. `npm run test:red` comprueba cálculo de tarifas, capacidad, firmas, diez identidades, propuestas y quórum.
+Para la [red de aula configurable](ejemplos/red-aula/README.md), volvé al laboratorio original y ejecutá `npm run red:aula`. No usa el nodo del Contador y no necesita instalar dependencias. `npm run test:red` comprueba tarifas, capacidad, firmas, cursos de distintos tamaños y nodos independientes. El [tutorial entre pares](ejemplos/red-aula/NODOS-INDEPENDIENTES.md) explica cómo ejecutar un nodo por computadora y mantener la red ante una caída.

@@ -1,5 +1,7 @@
-# Participar de una blockchain con diez estudiantes
+# Participar de una blockchain con distintos cursos
 
-La [guía completa y el programa](../../laboratorio/ejemplos/red-aula/README.md) explican preparación, roles, diez turnos, quórum, propuestas inválidas y recuperación de una copia de la cadena. El docente inicia el coordinador y cada estudiante ingresa desde su navegador.
+La [guía completa y el programa](../../laboratorio/ejemplos/red-aula/README.md) permiten configurar de 2 a 60 participantes. Cada ciclo de N turnos asigna una propuesta por identidad y el quórum se calcula como `floor(2 × N / 3) + 1`. Diez sigue siendo el ejemplo inicial.
 
-La simulación permite ejercer propuesta y validación. El material declara las diferencias con Ethereum PoS y conserva la práctica del Contador para operar como usuario de Sepolia.
+La modalidad coordinada requiere Node.js 24 en una computadora y navegadores para el resto. Su caída interrumpe el intercambio. La [modalidad de nodos independientes](../../laboratorio/ejemplos/red-aula/NODOS-INDEPENDIENTES.md) requiere Node.js 24 por estudiante. Los programas se comunican directamente, conservan sus datos y avanzan mediante decisiones certificadas por el grupo.
+
+El tutorial entre pares explica invitaciones, configuración común, propuesta, comprobación, quórum, caída, recuperación y evidencia. La simulación tiene reglas didácticas explícitas y no ejecuta Ethereum PoS. El Contador se conserva para operar como usuario de una red EVM.
