@@ -69,3 +69,5 @@ El [caso de certificados](https://grupo-gemis.github.io/blockchain-curso-2026/in
 - [Red de aula configurable](laboratorio/ejemplos/red-aula/README.md). Admite de 2 a 60 participantes. Incluye una modalidad de navegador con coordinador y otra de [nodos independientes entre pares](laboratorio/ejemplos/red-aula/NODOS-INDEPENDIENTES.md), con Node.js en cada computadora. La cantidad, los turnos y el quórum se adaptan al curso.
 
 El Contador permite actuar como usuario de una red. La red de aula permite experimentar sus responsabilidades de participación con un consenso didáctico explícito.
+
+Para cursar desde casas distintas, la [guía de conexión por Internet](laboratorio/ejemplos/red-aula/DESDE-CASA.md) explica la red privada virtual, el alta de cada equipo y la comprobación desde cada casa.

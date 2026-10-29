@@ -1,6 +1,6 @@
 # Una red con nodos independientes
 
-En esta modalidad cada computadora ejecuta su propio programa con Node.js 24. El navegador muestra y controla el nodo local. Los programas se comunican directamente por HTTP con las direcciones de sus compañeros y verifican las firmas recibidas. No necesitan un servidor central, una cuenta de nube ni Internet durante la sesión.
+En esta modalidad cada computadora ejecuta su propio programa con Node.js 24. El navegador muestra y controla el nodo local. Los programas se comunican directamente por HTTP con las direcciones de sus compañeros y verifican las firmas recibidas. En una misma red local no necesitan un servidor central ni Internet durante la sesión. **Si cada estudiante está en su casa, se conectan por Internet mediante la [guía para la cursada a distancia](DESDE-CASA.md)**. Esa guía configura una red privada virtual y explica sus dependencias de conectividad.
 
 La modalidad de [navegadores con coordinador](README.md) sigue disponible para una primera experiencia. Allí solo una computadora necesita Node.js y su caída interrumpe el intercambio. **Abrir muchas pestañas de esa modalidad no descentraliza su transporte.**
 
@@ -38,7 +38,7 @@ npm test
 
 El primer comando debe informar una versión 24 o posterior. El segundo ejecuta las pruebas y crea solo datos temporales de ensayo.
 
-Acuerden un número de nodo por estudiante, del 1 a N sin saltos. Anoten el nombre y la dirección IPv4 de cada computadora en la red local. Una dirección como `192.168.1.21` es un ejemplo que debe sustituirse por la real. `127.0.0.1` señala la propia computadora y no sirve como dirección para otros dispositivos.
+Acuerden un número de nodo por estudiante, del 1 a N sin saltos. Anoten el nombre y la dirección IPv4 que podrán alcanzar sus compañeros. En la misma red física se usa la dirección local. Desde casas distintas se usa la dirección de la VPN del curso, siguiendo DESDE-CASA.md. Una dirección como `192.168.1.21` es un ejemplo que debe sustituirse por la real. `127.0.0.1` señala la propia computadora y no sirve como dirección para otros dispositivos.
 
 ## 2. Arrancar mi nodo y crear mi identidad
 

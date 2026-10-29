@@ -1,5 +1,7 @@
 # Red de aula para distintos cursos
 
+**Si cada estudiante participa desde su casa**, comiencen por [conectar los equipos por Internet](DESDE-CASA.md). Cada uno conserva su nodo y usa la dirección privada virtual del curso.
+
 Hay dos modalidades: **navegadores con coordinador** y **nodos independientes entre pares**. Para vivir la descentralización, usen el [tutorial completo de nodos independientes](NODOS-INDEPENDIENTES.md). Cada computadora ejecuta Node.js y se comunica con sus compañeros.
 
 La modalidad coordinada que sigue permite comenzar con menos preparación. Cada estudiante participa como un nodo didáctico. Tiene una identidad de firma, conserva una copia de la cadena y comprueba las propuestas. La cantidad se configura entre 2 y 60. En N turnos todos pasan una vez por el rol de proponente. El valor inicial es diez. El docente coordina los tiempos y observa sin ocupar una identidad de estudiante.
@@ -117,7 +119,9 @@ En el informe, cada estudiante identifica una propuesta propia, una comprobació
 
 ## Si otras computadoras no llegan al aula
 
-Comprobá que se inició `npm run aula`, que todas usan la dirección de la computadora coordinadora y el puerto correcto y que están en la misma red. Algunas redes de invitados impiden la comunicación entre dispositivos. En ese caso, usen una red local que permita comunicar las computadoras o ensayen con pestañas independientes en la máquina docente. Cada navegador debe poder abrir la dirección antes de ingresar.
+Para estudiantes en casas distintas, usen la [guía por Internet](DESDE-CASA.md). La red física compartida no es un requisito si ya se configuró esa red virtual. Para la modalidad coordinada por VPN, la regla de acceso debe incluir TCP 4780 y los navegadores usan la dirección virtual del coordinador.
+
+Para una sesión presencial, comprobá que se inició `npm run aula`, que todas usan la dirección de la computadora coordinadora y el puerto correcto y que están en la misma red. Algunas redes de invitados impiden la comunicación entre dispositivos. En ese caso, usen una red local que permita comunicar las computadoras o ensayen con pestañas independientes en la máquina docente. Cada navegador debe poder abrir la dirección antes de ingresar.
 
 No hace falta Docker, sincronizar Sepolia ni configurar una extensión para este ejercicio. El enlace docente permite avanzar los turnos y se conserva en la computadora del docente. Compartí con los estudiantes la dirección sin ese acceso.
 

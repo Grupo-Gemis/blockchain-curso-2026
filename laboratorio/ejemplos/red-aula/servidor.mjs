@@ -161,7 +161,7 @@ export function createClassroom(options = {}) {
         save()
         return json(response, snapshot())
       }
-      const files = {'/':['index.html','text/html'], '/guia-pares':['NODOS-INDEPENDIENTES.md','text/plain'], '/app.js':['app.js','text/javascript'],
+      const files = {'/':['index.html','text/html'], '/guia-pares':['NODOS-INDEPENDIENTES.md','text/plain'], '/guia-internet':['DESDE-CASA.md','text/plain'], '/app.js':['app.js','text/javascript'],
         '/modelo.mjs':['modelo.mjs','text/javascript'], '/styles.css':['styles.css','text/css'],
         '/vendor/ethers.umd.cjs':['vendor/ethers.umd.cjs','text/javascript']}
       if (request.method !== 'GET' || !files[url.pathname]) return json(response, {error:'Archivo inexistente.'}, 404)

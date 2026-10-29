@@ -4,6 +4,7 @@ import {randomBytes} from 'node:crypto'
 import {networkInterfaces} from 'node:os'
 import {fileURLToPath} from 'node:url'
 import path from 'node:path'
+import {DEFAULT_WAIT,requestTimeout} from './conectividad.mjs'
 import {eth, copy, hash, sign, stable, checkTransaction, effectiveTip, nextBaseFee,
   selectByTip, buildBlock, blockBody, checkBlock} from './modelo.mjs'
 import {invitation, checkManifest, makeManifest, peerContext, checkProposal,
@@ -151,7 +152,7 @@ export async function createPeer(options) {
     syncing=Promise.allSettled(state.manifest.participants.filter(p=>p.slot!==secret.slot).map(async peer=>{
       try {
         const response=await fetch(peer.url+'/peer/sync',{method:'POST',headers:{'Content-Type':'application/json'},
-          body:JSON.stringify(snapshot),signal:AbortSignal.timeout(options.timeout || 1800)})
+          body:JSON.stringify(snapshot),signal:AbortSignal.timeout(options.timeout ?? DEFAULT_WAIT)})
         const incoming=await response.json()
         if(!response.ok) throw Error(incoming.error || 'El par no aceptó el mensaje.')
         await exclusive(()=>merge(incoming))
@@ -239,7 +240,7 @@ export async function createPeer(options) {
         if(options.autoSync!==false) void syncOnce()
         return
       }
-      const files={'/guia-pares':['NODOS-INDEPENDIENTES.md','text/plain'],'/':['p2p.html','text/html'],'/p2p.html':['p2p.html','text/html'],
+      const files={'/guia-internet':['DESDE-CASA.md','text/plain'],'/guia-pares':['NODOS-INDEPENDIENTES.md','text/plain'],'/':['p2p.html','text/html'],'/p2p.html':['p2p.html','text/html'],
         '/p2p.js':['p2p.js','text/javascript'],'/styles.css':['styles.css','text/css'],
         '/modelo.mjs':['modelo.mjs','text/javascript'],'/pares.mjs':['pares.mjs','text/javascript'],
         '/vendor/ethers.umd.cjs':['vendor/ethers.umd.cjs','text/javascript']}
@@ -273,7 +274,8 @@ if(process.argv[1] && path.resolve(process.argv[1])===fileURLToPath(import.meta.
   const lan=Object.values(networkInterfaces()).flat().find(n=>n.family==='IPv4' && !n.internal)?.address || '127.0.0.1'
   const dataDir=path.resolve(arg('--datos','datos-nodo-'+slot))
   const manifestFile=arg('--red',null)
-  const peer=await createPeer({slot,name:arg('--nombre','Nodo '+slot),url:arg('--anunciar','http://'+lan+':'+port),dataDir,
+  const timeout=requestTimeout(Number(arg('--espera-ms',String(DEFAULT_WAIT))))
+  const peer=await createPeer({slot,name:arg('--nombre','Nodo '+slot),url:arg('--anunciar','http://'+lan+':'+port),dataDir,timeout,
     ...(manifestFile?{manifest:JSON.parse(await readFile(manifestFile,'utf8'))}:{})})
   try {await peer.listen(port)}
   catch(error) {console.error(error.code==='EADDRINUSE'?'El puerto está ocupado. No se detuvo el otro proceso.':error.message);process.exitCode=1;await peer.close()}
@@ -281,6 +283,7 @@ if(process.argv[1] && path.resolve(process.argv[1])===fileURLToPath(import.meta.
     await writeFile(path.join(dataDir,'invitacion.json'),JSON.stringify(peer.invitation,null,2)+'\n')
     console.log('Nodo independiente '+slot+'. Datos privados en '+dataDir)
     console.log('Mi dirección entre pares: '+peer.invitation.url)
+    console.log('Desde casas distintas, --anunciar debe usar la dirección de la VPN del curso. Guía: DESDE-CASA.md')
     console.log('Mi control local: http://127.0.0.1:'+port+'/#control='+peer.controlKey)
     console.log('Compartí solo invitacion.json. Cada estudiante debe crear su propia identidad.')
     console.log('Cargá el mismo red.json que tus compañeros. Ctrl+C detiene solo este nodo.')
