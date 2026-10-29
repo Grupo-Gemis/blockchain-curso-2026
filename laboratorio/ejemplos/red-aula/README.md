@@ -1,8 +1,10 @@
 # Red de aula para distintos cursos
 
-**Si cada estudiante participa desde su casa**, comiencen por [conectar los equipos por Internet](DESDE-CASA.md). Cada uno conserva su nodo y usa la dirección privada virtual del curso.
+**Para operar clientes reales desde casa**, sigan [la red privada con Besu y Docker](real-besu/README.md). Cada computadora conserva su cadena y participa del consenso QBFT. La preparación está disponible y la ejecución entre casas está pendiente de comprobación. También se puede conectar la simulación mediante [la guía de Internet](DESDE-CASA.md).
 
-Hay dos modalidades: **navegadores con coordinador** y **nodos independientes entre pares**. Para vivir la descentralización, usen el [tutorial completo de nodos independientes](NODOS-INDEPENDIENTES.md). Cada computadora ejecuta Node.js y se comunica con sus compañeros.
+Hay tres modalidades: **simulación con coordinador**, **simulación de nodos independientes en la red local** y **red de clientes reales desde casa o en el laboratorio**. Las dos simulaciones permiten realizar a mano los pasos del consenso. En Besu los clientes cumplen esos deberes automáticamente. El [tutorial de nodos didácticos independientes](NODOS-INDEPENDIENTES.md) mantiene un programa Node.js por computadora y comunicación directa.
+
+La guía [cómo incorporarse a una red pública](NODO-PUBLICO.md) explica las diferencias entre verificar como nodo, activar un validador en Hoodi y participar del grupo autorizado de nuestra red privada.
 
 La modalidad coordinada que sigue permite comenzar con menos preparación. Cada estudiante participa como un nodo didáctico. Tiene una identidad de firma, conserva una copia de la cadena y comprueba las propuestas. La cantidad se configura entre 2 y 60. En N turnos todos pasan una vez por el rol de proponente. El valor inicial es diez. El docente coordina los tiempos y observa sin ocupar una identidad de estudiante.
 

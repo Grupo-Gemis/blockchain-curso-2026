@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "scope": "Cuatro clientes reales en un host. No verifica equipos de 8 GB ni enlaces entre casas.",
+  "fees": {
+    "gasUsed": "21000",
+    "effectiveGwei": "2.300657803",
+    "baseGwei": "0.300657803",
+    "feeETH": "0.000048313813863",
+    "burnedETH": "0.000006313813863",
+    "tipETH": "0.000042",
+    "feeRecipient": "0x4a468c036480f7f642a0f7f464e01004be18f964",
+    "status": 1
+  },
+  "compared": {
+    "sameBlockAndState": true,
+    "distinctNodes": true,
+    "reports": 4,
+    "block": 13,
+    "note": "Los archivos son observaciones exportadas. Esta comparación no reemplaza la validación interna de Besu ni autentica archivos modificados a mano."
+  },
+  "stats": "{\"BlockIO\":\"0B / 35.7MB\",\"CPUPerc\":\"12.85%\",\"Container\":\"d2fc3e19bf9e0a65e9167feb34cb3bdea75d03f515b9b52e0a44e6919b41d14b\",\"ID\":\"d2fc3e19bf9e\",\"MemPerc\":\"34.39%\",\"MemUsage\":\"704.3MiB / 2GiB\",\"Name\":\"utn-besu-prueba-1793297381583-nodo4-1\",\"NetIO\":\"185kB / 181kB\",\"PIDs\":\"76\"}\n{\"BlockIO\":\"0B / 35.6MB\",\"CPUPerc\":\"12.52%\",\"Container\":\"1be1f6e53efc8a83916085c4f669512b8c22b0e0791f0ba6ddc3d77f8489d4c2\",\"ID\":\"1be1f6e53efc\",\"MemPerc\":\"35.05%\",\"MemUsage\":\"717.8MiB / 2GiB\",\"Name\":\"utn-besu-prueba-1793297381583-nodo3-1\",\"NetIO\":\"174kB / 172kB\",\"PIDs\":\"85\"}\n{\"BlockIO\":\"0B / 34.6MB\",\"CPUPerc\":\"9.27%\",\"Container\":\"026d1a5d9d87b8a4e6ee139daeea04ac17a77b0b63aad49d181120670016f3a9\",\"ID\":\"026d1a5d9d87\",\"MemPerc\":\"34.78%\",\"MemUsage\":\"712.3MiB / 2GiB\",\"Name\":\"utn-besu-prueba-1793297381583-nodo1-1\",\"NetIO\":\"37.1kB / 32.3kB\",\"PIDs\":\"80\"}\n{\"BlockIO\":\"0B / 34.4MB\",\"CPUPerc\":\"25.85%\",\"Container\":\"8a9bba44f1d846704c990ef53c6b6728a99f42748aa86428330480fa7823e044\",\"ID\":\"8a9bba44f1d8\",\"MemPerc\":\"34.16%\",\"MemUsage\":\"699.6MiB / 2GiB\",\"Name\":\"utn-besu-prueba-1793297381583-nodo2-1\",\"NetIO\":\"40.9kB / 39.8kB\",\"PIDs\":\"74\"}\n",
+  "client": "Besu 26.10.2, Linux ARM64, Java 25",
+  "docker": "29.1.2, Linux ARM64, memoria del servicio 8217731072 bytes",
+  "at": "2026-10-29",
+  "containers": 4,
+  "network": "Red Docker en un host, no enlace entre casas",
+  "memorySampleMiB": [
+    699.6,
+    704.3,
+    712.3,
+    717.8
+  ]
+}

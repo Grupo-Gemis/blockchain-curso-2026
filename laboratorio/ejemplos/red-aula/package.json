@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "Red didáctica configurable, con modalidad coordinada y nodos independientes",
+  "description": "Red de aula configurable: simulación coordinada, nodos didácticos y clientes Besu reales",
   "engines": {
     "node": ">=24"
   },
@@ -14,6 +14,10 @@
     "puja": "node puja.mjs",
     "nodo": "node nodo.mjs",
     "crear:red": "node crear-red.mjs",
-    "diagnostico": "node diagnostico.mjs"
+    "diagnostico": "node diagnostico.mjs",
+    "real:preparar": "node real-besu/preparar.mjs",
+    "real:operar": "node real-besu/operar.mjs",
+    "real:verificar": "node real-besu/verificar.mjs",
+    "test:besu": "node --test tests/besu.test.mjs"
   }
 }

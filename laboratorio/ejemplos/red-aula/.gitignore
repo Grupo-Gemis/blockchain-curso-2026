@@ -4,3 +4,7 @@ node_modules/
 datos-nodo-*/
 invitaciones/
 red.json
+datos-besu-*/
+invitaciones-besu/
+red-besu.json
+evidencia-*.json

@@ -1,5 +1,7 @@
 # Cada estudiante desde su casa: conectar los nodos por Internet
 
+Esta guía conecta **la simulación entre pares**. Para ejecutar clientes de blockchain reales, seguir [Besu con Docker](real-besu/README.md). Se puede usar la misma VPN, con los puertos P2P que indica ese tutorial. Docker es necesario en la modalidad Besu.
+
 No necesitan estar en el mismo Wi-Fi. Cada estudiante ejecuta su nodo en su computadora y los conectamos mediante una **red privada virtual entre pares**, o VPN. La VPN proporciona direcciones que se pueden alcanzar desde las otras casas y protege el transporte. El programa de blockchain sigue comprobando firmas y reglas en cada equipo.
 
 Para esta cursada se propone **NetBird**, con una red de laboratorio administrada por el docente y un equipo por estudiante. La alternativa de la misma red local sigue disponible en [el tutorial general](NODOS-INDEPENDIENTES.md). Los pasos de consenso, puja, quórum y recuperación son los mismos.
