@@ -34,31 +34,23 @@ npm run preparar:testnet
 
 El comando informa una carpeta `practicas/testnet-observable`. Abrí **esa carpeta** en VS Code y después su archivo `Testnet.code-workspace`. El preparador conserva las copias anteriores. Para crear otra copia usá `npm run preparar:testnet -- --nombre otro-ensayo` desde el laboratorio original.
 
-Dentro de la copia nueva:
+Dentro de la copia nueva, con Node.js 24 LTS:
 
 ```sh
-npm ci
-npm run compilar
-npm test
+npm run preparar
 ```
 
-Se necesita el Node.js indicado por el repositorio, como en 04/05. La instalación inicial descarga dependencias. Las pruebas arrancan su propio nodo temporal y lo cierran al terminar. No consultan Sepolia.
+Este comando instala las versiones fijadas, compila el contrato y ejecuta seis pruebas locales. Las pruebas arrancan su propio nodo temporal y lo cierran al terminar. No consultan Sepolia. La primera instalación necesita Internet.
 
 ## Abrir el ensayo local
 
-En la primera terminal de la copia:
+Desde la copia preparada:
 
 ```sh
-npm run nodo
+npm start
 ```
 
-Dejala abierta. En otra terminal de la misma carpeta:
-
-```sh
-npm run interfaz
-```
-
-Abrí <http://127.0.0.1:4373>. También podés ejecutar las tareas numeradas desde **Terminal → Ejecutar tarea**. No se inicia ningún servicio al abrir el workspace.
+El iniciador compila y abre juntos nodo e interfaz. Abrí <http://127.0.0.1:4373> y dejá esa terminal abierta. Ctrl+C detiene ambos servicios. Si el puerto está ocupado, el iniciador lo informa y conserva el servicio existente. Las tareas numeradas de VS Code también permiten iniciar nodo e interfaz por separado.
 
 | Servicio | Dirección | Función |
 |---|---|---|
@@ -69,3 +61,9 @@ Abrí <http://127.0.0.1:4373>. También podés ejecutar las tareas numeradas des
 Los laboratorios 04/05 conservan sus puertos 8545 y 4173. Sus nodos y contratos son independientes de esta práctica.
 
 Continuá con [GUIA-06-07.md](GUIA-06-07.md). Para detener un servicio, usá Ctrl+C en su propia terminal. No compartas las cuentas de desarrollo del nodo local como cuentas públicas de Sepolia.
+
+## Manual y práctica de nodos
+
+El [tutorial completo en PDF](tutorial/Tutorial_Sepolia_paso_a_paso.pdf) y su [versión editable](tutorial/Tutorial_Sepolia_paso_a_paso.docx) documentan la demostración de dos cuentas. La preparación del manual usa la misma copia resuelta y los mismos comandos. Las capturas son evidencia fechada y los servicios externos pueden cambiar.
+
+Para experimentar propuesta, comprobación, votos y quórum con diez estudiantes, seguí la [red de aula](../red-aula/README.md) desde la carpeta de ejemplos del repositorio. Esa simulación tiene su propio coordinador y puerto 4780.

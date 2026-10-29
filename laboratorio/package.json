@@ -22,7 +22,9 @@
     "token": "node scripts/token.mjs",
     "preparar:guiado": "node scripts/preparar-guiado.mjs",
     "preparar:certificados": "node scripts/preparar-certificados.mjs",
-    "preparar:testnet": "node scripts/preparar-testnet.mjs"
+    "preparar:testnet": "node scripts/preparar-testnet.mjs",
+    "red:aula": "node ejemplos/red-aula/servidor.mjs --aula",
+    "test:red": "node --test ejemplos/red-aula/tests/*.test.mjs"
   },
   "dependencies": {
     "ethers": "6.16.0",

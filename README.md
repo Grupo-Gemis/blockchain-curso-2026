@@ -61,3 +61,11 @@ Las plantillas CSV se abren en Google Sheets, LibreOffice o Excel. Las filas de 
 ## Integrar las diez unidades
 
 El [caso de certificados](https://grupo-gemis.github.io/blockchain-curso-2026/integracion.html) reúne lectura y presentación. La [práctica guiada](laboratorios/integracion-certificados/README.md) permite comprobar documentos, registros, permisos, disponibilidad y costos. El código se entrega completo y las evidencias se reutilizan entre unidades.
+
+
+## Prácticas completas de las unidades 06 y 07
+
+- [Contador resuelto y tutorial completo de Sepolia](laboratorio/ejemplos/testnet-observable/README.md). Incluye PDF, Word editable, apuntes, preparación automática y ensayo local.
+- [Red de aula para diez estudiantes](laboratorio/ejemplos/red-aula/README.md). Cada identidad firma, propone por turnos, comprueba bloques y participa de un quórum de siete votos. El docente coordina y todos conservan una réplica verificable.
+
+El Contador permite actuar como usuario de una red. La red de aula permite experimentar sus responsabilidades de participación con un consenso didáctico explícito.

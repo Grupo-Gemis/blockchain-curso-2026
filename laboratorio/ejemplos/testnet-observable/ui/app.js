@@ -3,8 +3,8 @@ import {comprobarRed,observar,comparar,historia} from './observacion.js'
 const $=id=>document.getElementById(id)
 let proveedor,firmante,instancia,artifact,contexto=0,ocupado=false,actualizando=false
 let configuracion={},observaciones=[],eventos=[],redConectada
-const storage='utn-testnet-observable-v1-'
-const mensaje=texto=>{$('estado').textContent=texto}
+const storage='utn-blockchain-laboratorios-v1-'
+const mensaje=texto=>{$('estado').textContent=texto;$('estado-conexion').textContent=texto}
 function controles() {
   for(const id of ['desplegar','abrir','observar','comparar']) $(id).disabled=ocupado||!firmante
   for(const id of ['leer','incrementar','reiniciar','revertir','historia']) $(id).disabled=ocupado||!instancia
@@ -35,6 +35,7 @@ function cambioModo() {
   const local=$('modo').value==='31337'; $('cuentas-locales').hidden=!local
   $('alcance').textContent=local?'Ensayo local: un proceso de desarrollo produce los bloques. Este modo no reproduce el consenso PoS.':
     'Sepolia: red pública de prueba con PoS y validadores restringidos. Cada envío requiere tu firma en la wallet. No uses fondos de mainnet.'
+  if(!local&&!window.ethereum) mensaje('Este navegador no ofrece una wallet. Abrí http://127.0.0.1:4373 en Chrome con MetaMask instalada y desbloqueada. Seleccioná Sepolia en la wallet y en esta página. Abajo tenés el paso a paso.')
 }
 function errorVisible(error) {
   if(error.code===4001||error.code==='ACTION_REJECTED') return 'Firma o conexión cancelada. No se observó un envío desde esta acción.'
@@ -58,7 +59,7 @@ async function conectar(version) {
   let nuevo
   try {
     artifact=await cargarArtifact()
-    if(!local&&!window.ethereum) throw Error('Práctica: abrí esta página en un navegador con wallet y seleccioná Sepolia.')
+    if(!local&&!window.ethereum) throw Error('Práctica: Este navegador no ofrece una wallet. Abrí http://127.0.0.1:4373 en Chrome con MetaMask instalada y desbloqueada. Seleccioná Sepolia en la wallet y en esta página. Abajo tenés el paso a paso.')
     nuevo=local?new JsonRpcProvider('http://127.0.0.1:19745',undefined,{cacheTimeout:-1}):new BrowserProvider(window.ethereum,undefined,{cacheTimeout:-1})
     if(!local) await nuevo.send('eth_requestAccounts',[])
     comprobarRed((await nuevo.getNetwork()).chainId,red)

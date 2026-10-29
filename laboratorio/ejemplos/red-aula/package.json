@@ -1,0 +1,14 @@
+{
+  "name": "blockchain-red-aula",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Simulación participativa de una blockchain para diez estudiantes",
+  "engines": {"node": ">=24"},
+  "scripts": {
+    "start": "node servidor.mjs",
+    "aula": "node servidor.mjs --aula",
+    "test": "node --test tests/*.test.mjs",
+    "puja": "node puja.mjs"
+  }
+}

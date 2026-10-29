@@ -146,3 +146,17 @@ El comando npm run preparar:certificados crea una copia en practicas/certificado
 ## Práctica conjunta de gas y red pública · Unidades 06 y 07
 
 Ejecutá npm run preparar:testnet y abrí EMPEZAR-AQUI.md de la carpeta que informa el comando. Incluye el contador completo, ensayo local, conexión de wallet a Sepolia, costo efectivo, seguimiento de inclusión y finalización, eventos y valores históricos. La copia utiliza puertos propios y conserva los ejercicios originales. La parte pública se prepara con el docente y saldo gratuito. No condiciona la aprobación individual. La guía completa se conserva en ejemplos/testnet-observable/GUIA-06-07.md.
+
+
+## Inicio completo de 06 y 07
+
+La [práctica resuelta](ejemplos/testnet-observable/README.md) incluye el manual completo en PDF y Word, los apuntes y los scripts. Desde esta carpeta:
+
+```sh
+npm run preparar:testnet
+cd practicas/testnet-observable
+npm run preparar
+npm start
+```
+
+Para la [red de aula de diez estudiantes](ejemplos/red-aula/README.md), volvé al laboratorio original y ejecutá `npm run red:aula`. No usa el nodo del Contador y no necesita instalar dependencias. `npm run test:red` comprueba cálculo de tarifas, capacidad, firmas, diez identidades, propuestas y quórum.

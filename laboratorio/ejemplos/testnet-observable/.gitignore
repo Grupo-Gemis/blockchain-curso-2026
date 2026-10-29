@@ -1,0 +1,10 @@
+node_modules/
+artifacts/
+cache/
+.npm-cache/
+resultados/
+.env
+.env.*
+!.env.example
+.DS_Store
+ui/despliegue.json

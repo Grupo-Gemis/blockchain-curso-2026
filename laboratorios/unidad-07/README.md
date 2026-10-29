@@ -74,3 +74,10 @@ La [guía completa de gas, transacciones e historia](../../laboratorio/ejemplos/
 Primero ensayamos localmente. Luego el docente guía la creación en Sepolia, los incrementos, la comisión efectiva, la reversión incluida, la consulta desde otra computadora, la historia y el seguimiento de finalización. Quienes no firman pueden observar desde el explorador. La entrega local conserva los criterios anteriores cuando no hay recursos públicos gratuitos.
 
 La evidencia adicional distingue red local y Sepolia. Incluye tabla de operaciones, recibos y JSON de observaciones, más una explicación de qué permiten comprobar dos accesos RPC y qué requiere observar el consenso. Los tests locales no acreditan haber ejecutado la parte pública.
+
+
+## Participación de diez nodos didácticos
+
+La [red de aula](../../laboratorio/ejemplos/red-aula/README.md) permite experimentar selección de transacciones, propuesta, comprobación independiente y atestaciones. En diez turnos todos pueden proponer. El certificado requiere siete votos distintos y la guía explica su finalidad simplificada.
+
+El [ejemplo resuelto del Contador](../../laboratorio/ejemplos/testnet-observable/README.md) incluye el tutorial completo en PDF y Word. Las dos prácticas tienen código terminado y conservan los ejercicios originales.

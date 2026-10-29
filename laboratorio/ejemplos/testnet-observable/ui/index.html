@@ -7,7 +7,18 @@
 <div class="grid"><section class="card"><h2>1. Elegir la red y la cuenta</h2>
 <label for="modo">Entorno</label><select id="modo"><option value="31337">Ensayo local · 31337</option><option value="11155111">Sepolia · 11155111</option></select>
 <div id="cuentas-locales"><label for="cuenta">Cuenta local</label><select id="cuenta"><option value="0">Ana · cuenta 0</option><option value="1">Bruno · cuenta 1</option></select></div>
-<button id="conectar">Conectar</button><p class="ayuda">En Sepolia, conectar abre la wallet. Usá una cuenta dedicada con ETH de prueba. La aplicación no solicita claves ni frases de recuperación.</p>
+<button id="conectar">Conectar</button>
+<p id="estado-conexion" class="status" role="status" aria-live="polite">Conectá para comenzar.</p>
+<details><summary>Paso a paso para conectar a Sepolia</summary>
+<ol><li>Abrí esta dirección en Chrome: <strong>http://127.0.0.1:4373</strong>.</li>
+<li>Usá una wallet de navegador como MetaMask. Si falta, instalala desde su <a href="https://metamask.io/download/" target="_blank" rel="noopener noreferrer">sitio oficial</a>. Abrila y desbloqueala.</li>
+<li>En la wallet, habilitá las redes de prueba y elegí <strong>Sepolia</strong>. <a href="https://support.metamask.io/es/configure/networks/how-to-view-testnets-in-metamask/" target="_blank" rel="noopener noreferrer">Instrucciones oficiales</a>.</li>
+<li>Elegí <strong>Sepolia</strong> en el selector Entorno de esta página. Pulsá <strong>Conectar</strong> y autorizá la conexión de la cuenta de prueba en la wallet.</li>
+<li>Comprobá que la red observada sea <strong>11155111 · Sepolia</strong>. Para conectar alcanza con la wallet. Para crear o modificar el contrato necesitás ETH de Sepolia, que podés pedir en un faucet de la <a href="https://ethereum.org/developers/docs/networks/#sepolia" target="_blank" rel="noopener noreferrer">lista oficial de Ethereum</a>.</li>
+<li>Con saldo de prueba, pulsá <strong>Crear Contador</strong>. Revisá y confirmá la operación en la wallet. Esperá el recibo y el valor inicial 0. Después podés incrementar y consultar eventos.</li></ol>
+<p>Si no aparece la wallet, abrí su extensión y revisá sus solicitudes pendientes. Si los botones de operación siguen desactivados, comprobá primero la conexión. La aplicación no solicita claves ni frases de recuperación.</p>
+</details>
+<p class="ayuda">En Sepolia, conectar abre la wallet. Usá una cuenta dedicada con ETH de prueba. La aplicación no solicita claves ni frases de recuperación.</p>
 <dl><dt>Red observada</dt><dd id="red">Sin conexión</dd><dt>Cuenta</dt><dd id="direccion-cuenta">—</dd><dt>Saldo</dt><dd id="saldo">—</dd></dl>
 </section><section class="card"><h2>2. Crear o abrir una instancia</h2>
 <button id="desplegar" disabled>Crear Contador</button><p class="ayuda">Crear solicita una transacción nueva. En Sepolia se revisa y firma en la wallet.</p>
