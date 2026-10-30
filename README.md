@@ -73,3 +73,8 @@ El Contador permite actuar como usuario de una red. La red de aula permite exper
 Para cursar desde casas distintas, la [guía de conexión por Internet](laboratorio/ejemplos/red-aula/DESDE-CASA.md) explica la red privada virtual, el alta de cada equipo y la comprobación desde cada casa.
 
 La tercera modalidad utiliza [clientes Besu reales con Docker](laboratorio/ejemplos/red-aula/real-besu/README.md), un nodo por computadora desde casa o en el laboratorio. Incluye preparación configurable de 4 a 60 validadores, transferencias con recibos y ensayos de fallas. Su ejecución entre casas está pendiente de comprobación. La guía [nodo público y validador](laboratorio/ejemplos/red-aula/NODO-PUBLICO.md) explica cómo ingresar a Ethereum y Hoodi.
+
+
+## Práctica completa de la unidad 08
+
+[TokenAula con Ana, Bruno y Carla](laboratorio/ejemplos/token-observable/README.md) incluye contrato resuelto, interfaz local, tutorial y nueve pruebas. Permite observar saldos, gas en ETH, autorizaciones, gasto delegado, revocación y dos formas de rechazo. La [consigna de la unidad](laboratorios/unidad-08/README.md) conecta esas evidencias con el white paper.

@@ -160,3 +160,8 @@ npm start
 ```
 
 Para la [red de aula configurable](ejemplos/red-aula/README.md), volvé al laboratorio original y ejecutá `npm run red:aula`. No usa el nodo del Contador y no necesita instalar dependencias. `npm run test:red` comprueba tarifas, capacidad, firmas, cursos de distintos tamaños y nodos independientes. El [tutorial entre pares](ejemplos/red-aula/NODOS-INDEPENDIENTES.md) explica cómo ejecutar un nodo por computadora y mantener la red ante una caída.
+
+
+## Unidad 08 · Ejemplo completo de tokens
+
+La carpeta [ejemplos/token-observable](ejemplos/token-observable/README.md) trae una práctica independiente y resuelta. Incluye interfaz con Ana, Bruno y Carla, tutorial, plantilla de white paper y nueve pruebas. Con Node.js 24 LTS, entrá en esa carpeta y ejecutá `npm run preparar` seguido de `npm start`. El constructor del ejercicio original conserva su TODO.
